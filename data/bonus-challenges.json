@@ -1,0 +1,90 @@
+[
+  {
+    "id": "lava-rising",
+    "title": "Lava Rising",
+    "core": [
+      {
+        "id": "lava-core-arena",
+        "text": "Postav arénu s překážkami a jasným startem.",
+        "points": 10,
+        "kind": "base"
+      },
+      {
+        "id": "lava-core-rise",
+        "text": "Přidej skript, který pomalu zvedá lávu.",
+        "points": 12,
+        "kind": "base"
+      },
+      {
+        "id": "lava-core-win",
+        "text": "Cíl: přežij 60 sekund nebo doběhni do safe zóny.",
+        "points": 8,
+        "kind": "base"
+      }
+    ],
+    "bonus": [
+      {
+        "id": "lava-bonus-jump",
+        "text": "Power-up: vyšší skok.",
+        "points": 6,
+        "kind": "extra"
+      },
+      {
+        "id": "lava-bonus-coins",
+        "text": "Spawn coinů navíc po mapě.",
+        "points": 6,
+        "kind": "extra"
+      },
+      {
+        "id": "lava-bonus-ui",
+        "text": "UI timer (odpočet času).",
+        "points": 6,
+        "kind": "extra"
+      }
+    ]
+  },
+  {
+    "id": "key-hunt",
+    "title": "Key Hunt (3 klíče)",
+    "core": [
+      {
+        "id": "key-core-hide",
+        "text": "Schovej 3 klíče po mapě.",
+        "points": 10,
+        "kind": "base"
+      },
+      {
+        "id": "key-core-door",
+        "text": "Dveře se otevřou po sebrání 3 klíčů.",
+        "points": 12,
+        "kind": "base"
+      },
+      {
+        "id": "key-core-finish",
+        "text": "Na konci je finish místo.",
+        "points": 8,
+        "kind": "base"
+      }
+    ],
+    "bonus": [
+      {
+        "id": "key-bonus-ui",
+        "text": "UI checklist klíčů 0/3.",
+        "points": 6,
+        "kind": "extra"
+      },
+      {
+        "id": "key-bonus-random",
+        "text": "Náhodné pozice klíčů při startu.",
+        "points": 6,
+        "kind": "extra"
+      },
+      {
+        "id": "key-bonus-effects",
+        "text": "Zvuky a světla při sebrání klíče.",
+        "points": 6,
+        "kind": "extra"
+      }
+    ]
+  }
+]

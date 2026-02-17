@@ -1,0 +1,210 @@
+{
+  "task1": {
+    "id": "ukol-1",
+    "title": "Úkol 1 – Cesta za pokladem (Treasure Path)",
+    "goal": "Postav cestu od Startu až k Pokladu. Cesta má aspoň 6 překážek.",
+    "maxPoints": 50,
+    "sections": [
+      {
+        "id": "t1-proces",
+        "title": "Proces (povinné, 0 bodů)",
+        "items": [
+          {
+            "id": "t1-save",
+            "text": "Ulož projekt (Ctrl+S) a pojmenuj ho tak, abys ho našel i zítra",
+            "points": 0,
+            "kind": "process"
+          },
+          {
+            "id": "t1-playtest-1",
+            "text": "Nech souseda projít tvoji cestu, ať ti řekne 1 věc, co je matoucí, těžké a/nebo super",
+            "points": 0,
+            "kind": "process"
+          },
+          {
+            "id": "t1-fix-1",
+            "text": "Oprav aspoň 1 věc podle zpětné vazby (třeba sklon, mezera, viditelnost)",
+            "points": 0,
+            "kind": "process"
+          }
+        ]
+      },
+      {
+        "id": "t1-zaklad",
+        "title": "Základ (doporučeno stihnout)",
+        "items": [
+          {
+            "id": "t1-start",
+            "text": "Start: místo, kde se hráč objeví a má prostor se rozhlédnout",
+            "points": 6,
+            "kind": "base"
+          },
+          {
+            "id": "t1-path",
+            "text": "Cesta: aspoň 6 překážek (skoky, úzké plošiny, schody, pohyblivá věc…)",
+            "points": 12,
+            "kind": "base"
+          },
+          {
+            "id": "t1-finish",
+            "text": "Poklad/Finish: jasné místo na konci (místnost, pad, nápis)",
+            "points": 8,
+            "kind": "base"
+          },
+          {
+            "id": "t1-playable",
+            "text": "Hratelnost: zvládneš to projít celé bez „softlocku“ (nejde pokračovat)",
+            "points": 4,
+            "kind": "base"
+          }
+        ]
+      },
+      {
+        "id": "t1-vylepseni",
+        "title": "Vylepšení (vyber si, co tě baví)",
+        "items": [
+          {
+            "id": "t1-shortcut",
+            "text": "Tajná zkratka (pro šikovné hráče)",
+            "points": 4,
+            "kind": "extra"
+          },
+          {
+            "id": "t1-false",
+            "text": "Falešná cesta (vede do pasti / slepé uličky)",
+            "points": 4,
+            "kind": "extra"
+          },
+          {
+            "id": "t1-theme",
+            "text": "Téma + dekorace + „pokladní“ atmosféra (džungle, led, vesmír…)",
+            "points": 4,
+            "kind": "extra"
+          },
+          {
+            "id": "t1-mechanic",
+            "text": "Jedna mechanická překážka: pohyblivá plošina NEBO točící překážka",
+            "points": 4,
+            "kind": "extra"
+          },
+          {
+            "id": "t1-effect",
+            "text": "Efekt: světlo NEBO zvuk NEBO dveře NEBO past",
+            "points": 4,
+            "kind": "extra"
+          }
+        ]
+      }
+    ]
+  },
+  "task2": {
+    "id": "ukol-2",
+    "title": "Úkol 2 – Temple Escape (Coins & Traps)",
+    "goal": "Postav únikovou hru: cestu + mince + 2 pasti + jasné vítězství.",
+    "maxPoints": 100,
+    "sections": [
+      {
+        "id": "t2-proces",
+        "title": "Proces (povinné, 0 bodů)",
+        "items": [
+          {
+            "id": "t2-save",
+            "text": "Ulož projekt (Ctrl+S) a pojmenuj ho (TempleEscape_Jmeno)",
+            "points": 0,
+            "kind": "process"
+          },
+          {
+            "id": "t2-playtest-1",
+            "text": "Po 30 minutách si vyměň hru se sousedem a řekněte si 1 věc ke zlepšení",
+            "points": 0,
+            "kind": "process"
+          },
+          {
+            "id": "t2-fix-1",
+            "text": "Oprav 1 věc podle zpětné vazby (jasný směr, bezpečný skok, checkpoint…)",
+            "points": 0,
+            "kind": "process"
+          }
+        ]
+      },
+      {
+        "id": "t2-zaklad",
+        "title": "Základ (povinné)",
+        "items": [
+          {
+            "id": "t2-start",
+            "text": "Start + Spawn: hráč se objeví na bezpečném místě",
+            "points": 10,
+            "kind": "base"
+          },
+          {
+            "id": "t2-level",
+            "text": "Level 1: trvá cca 30–60 sekund (když jdeš normálně)",
+            "points": 10,
+            "kind": "base"
+          },
+          {
+            "id": "t2-coins",
+            "text": "10 coinů: dají se sebrat a počítají se",
+            "points": 10,
+            "kind": "base"
+          },
+          {
+            "id": "t2-kill",
+            "text": "Past 1: zabijácká (když se dotkneš, umřeš)",
+            "points": 8,
+            "kind": "base"
+          },
+          {
+            "id": "t2-disappear",
+            "text": "Past 2: mizící blok (zmizí a zase se vrátí)",
+            "points": 8,
+            "kind": "base"
+          },
+          {
+            "id": "t2-win",
+            "text": "Konec: finish + „Vyhrál jsi!“ moment (text/GUI)",
+            "points": 4,
+            "kind": "base"
+          }
+        ]
+      },
+      {
+        "id": "t2-vylepseni",
+        "title": "Vylepšení (tvoje volba)",
+        "items": [
+          {
+            "id": "t2-level2",
+            "text": "Level 2: další část (delší hra)",
+            "points": 10,
+            "kind": "extra"
+          },
+          {
+            "id": "t2-checkpoints",
+            "text": "Checkpointy: když spadneš, respawneš blíž",
+            "points": 10,
+            "kind": "extra"
+          },
+          {
+            "id": "t2-warning",
+            "text": "Blikající varování před zmizením / pastí",
+            "points": 10,
+            "kind": "extra"
+          },
+          {
+            "id": "t2-moving",
+            "text": "Pohyblivá platforma (výtah nebo jezdící plošina)",
+            "points": 10,
+            "kind": "extra"
+          },
+          {
+            "id": "t2-secret",
+            "text": "Secret room: tajná místnost s odměnou (třeba 3 coiny)",
+            "points": 10,
+            "kind": "extra"
+          }
+        ]
+      }
+    ]
+  }
+}

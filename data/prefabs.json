@@ -1,0 +1,443 @@
+[
+  {
+    "id": "mizejiciblok",
+    "title": "Mizící blok",
+    "difficulty": "lehke",
+    "usedIn": [
+      "ukol-2",
+      "ukol-1"
+    ],
+    "concepts": [
+      "proměnná",
+      "funkce",
+      "cyklus while",
+      "vlastnosti (Transparency, CanCollide)"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "MizejiciBlokScript",
+    "subtitle": "Blok se střídavě skrývá a objevuje (on/off)"
+  },
+  {
+    "id": "postupnemizejiciblok",
+    "title": "Postupně mizící blok",
+    "difficulty": "lehke",
+    "usedIn": [
+      "ukol-2"
+    ],
+    "concepts": [
+      "for cyklus",
+      "Transparency",
+      "CanCollide",
+      "wait"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "PostupneMizejiciBlokScript",
+    "subtitle": "Blok se plynule ztrácí a pak vrátí (fade)"
+  },
+  {
+    "id": "zabijhrace",
+    "title": "Zabijácký blok",
+    "difficulty": "lehke",
+    "usedIn": [
+      "ukol-2"
+    ],
+    "concepts": [
+      "událost Touched",
+      "Humanoid",
+      "podmínka if"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "ZabijHraceScript",
+    "subtitle": "Po dotyku hráče okamžitě vyřadí (kill brick)"
+  },
+  {
+    "id": "vytah",
+    "title": "Pohyblivá plošina",
+    "difficulty": "stredni",
+    "usedIn": [
+      "ukol-2",
+      "bonus"
+    ],
+    "concepts": [
+      "for cyklus",
+      "CFrame posun",
+      "wait"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "VytahScript",
+    "subtitle": "Jezdí nahoru a dolů jako výtah"
+  },
+  {
+    "id": "rotace",
+    "title": "Točící se překážka",
+    "difficulty": "lehke",
+    "usedIn": [
+      "ukol-1",
+      "ukol-2",
+      "bonus"
+    ],
+    "concepts": [
+      "cyklus while",
+      "CFrame rotace"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "RotaceScript",
+    "subtitle": "Blok se stále otáčí kolem osy"
+  },
+  {
+    "id": "jedovazona",
+    "title": "Jedová zóna",
+    "difficulty": "stredni",
+    "usedIn": [
+      "ukol-2",
+      "bonus"
+    ],
+    "concepts": [
+      "Touched/TouchEnded",
+      "while",
+      "Humanoid.Health"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "JedovaZonaScript",
+    "subtitle": "Při kontaktu postupně ubírá život"
+  },
+  {
+    "id": "lecivazona",
+    "title": "Léčivá zóna",
+    "difficulty": "stredni",
+    "usedIn": [
+      "bonus"
+    ],
+    "concepts": [
+      "Touched/TouchEnded",
+      "while",
+      "Humanoid.Health"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "LecivaZonaScript",
+    "subtitle": "Při kontaktu postupně doplňuje život"
+  },
+  {
+    "id": "jedpripohybu",
+    "title": "Poškozující past",
+    "difficulty": "lehke",
+    "usedIn": [
+      "bonus"
+    ],
+    "concepts": [
+      "wait",
+      "Health - 1"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "JedPriPohybuScript",
+    "subtitle": "Při dotyku ubere 1 život a má cooldown"
+  },
+  {
+    "id": "desivytunel",
+    "title": "Strašidelný tunel",
+    "difficulty": "pokrocile",
+    "usedIn": [
+      "bonus"
+    ],
+    "concepts": [
+      "FindFirstChild",
+      "for cyklus",
+      "CFrame posun",
+      "UI transparency"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "DesivyTunelScript",
+    "subtitle": "Po vstupu spustí efekty a posun objektu"
+  },
+  {
+    "id": "lightning",
+    "title": "Den a noc",
+    "difficulty": "pokrocile",
+    "usedIn": [
+      "bonus"
+    ],
+    "concepts": [
+      "Lighting service",
+      "while",
+      "if"
+    ],
+    "source": "animace.rbxl",
+    "scriptName": "LightningScript",
+    "subtitle": "Automaticky mění čas ve světě (ClockTime)"
+  },
+  {
+    "id": "puvodni",
+    "title": "Žebříček bodů",
+    "difficulty": "pokrocile",
+    "usedIn": [
+      "bonus",
+      "ukol-2"
+    ],
+    "concepts": [
+      "Players service",
+      "PlayerAdded",
+      "Folder leaderstats",
+      "IntValue",
+      "while loop",
+      "Attributes"
+    ],
+    "source": "zebricek.rbxl",
+    "scriptName": "PuvodniScript",
+    "subtitle": "Leaderstats a body za přežitý čas"
+  },
+  {
+    "id": "bodyrychleji",
+    "title": "Bonusová bodová zóna",
+    "difficulty": "stredni",
+    "usedIn": [
+      "bonus"
+    ],
+    "concepts": [
+      "Touched/TouchEnded",
+      "while",
+      "barva bloku",
+      "práce se jménem hráče"
+    ],
+    "source": "zebricek.rbxl",
+    "scriptName": "BodyRychlejiScript",
+    "subtitle": "V zóně přidává hráči body navíc"
+  },
+  {
+    "id": "leaderstats-coins",
+    "title": "Žebříček mincí",
+    "difficulty": "stredni",
+    "usedIn": [
+      "ukol-2"
+    ],
+    "concepts": [
+      "Players.PlayerAdded",
+      "Folder leaderstats",
+      "IntValue"
+    ],
+    "source": "template",
+    "scriptName": "LeaderstatsCoins",
+    "subtitle": "Přidá Coins do leaderstats"
+  },
+  {
+    "id": "coin-pickup",
+    "title": "Sbírání mince",
+    "difficulty": "stredni",
+    "usedIn": [
+      "ukol-2"
+    ],
+    "concepts": [
+      "Touched",
+      "GetPlayerFromCharacter",
+      "leaderstats",
+      "debounce"
+    ],
+    "source": "template",
+    "scriptName": "CoinPickup",
+    "subtitle": "Po dotyku přičte +1 coin a minci odstraní"
+  },
+  {
+    "id": "checkpoint",
+    "title": "Kontrolní bod",
+    "difficulty": "pokrocile",
+    "usedIn": [
+      "ukol-2"
+    ],
+    "concepts": [
+      "SpawnLocation",
+      "Player.RespawnLocation",
+      "Touched"
+    ],
+    "source": "template",
+    "scriptName": "CheckpointRespawn",
+    "subtitle": "Nastaví respawn na poslední checkpoint"
+  },
+  {
+    "id": "blink-warning",
+    "title": "Blikající blok",
+    "difficulty": "lehke",
+    "usedIn": [
+      "ukol-2"
+    ],
+    "concepts": [
+      "while",
+      "wait",
+      "Transparency"
+    ],
+    "source": "template",
+    "scriptName": "BlinkWarning",
+    "subtitle": "Varovný blok, bliká před pastí"
+  },
+  {
+    "id": "finish-win",
+    "title": "Výherný cíl",
+    "difficulty": "pokrocile",
+    "usedIn": [
+      "ukol-1",
+      "ukol-2"
+    ],
+    "concepts": [
+      "Touched",
+      "PlayerGui",
+      "ScreenGui",
+      "TextLabel",
+      "podmínka"
+    ],
+    "source": "template",
+    "scriptName": "FinishWinGui",
+    "subtitle": "Po dosažení ukáže \"Vyhrál jsi!\""
+  },
+  {
+    "id": "lava-rise-core",
+    "title": "Stoupající láva",
+    "difficulty": "stredni",
+    "usedIn": [
+      "bonus",
+      "lava-rising"
+    ],
+    "concepts": [
+      "while",
+      "CFrame",
+      "wait",
+      "tempo"
+    ],
+    "source": "template",
+    "scriptName": "LavaRiseCore",
+    "subtitle": "Láva se postupně zvedá"
+  },
+  {
+    "id": "lava-safe-zone-win",
+    "title": "Bezpečná zóna",
+    "difficulty": "stredni",
+    "usedIn": [
+      "bonus",
+      "lava-rising"
+    ],
+    "concepts": [
+      "Touched",
+      "Humanoid",
+      "if"
+    ],
+    "source": "template",
+    "scriptName": "LavaSafeZoneWin",
+    "subtitle": "Po doběhnutí do safe zóny zobrazí výhru"
+  },
+  {
+    "id": "jump-powerup",
+    "title": "Skokový bonus",
+    "difficulty": "lehke",
+    "usedIn": [
+      "bonus",
+      "lava-rising"
+    ],
+    "concepts": [
+      "Touched",
+      "JumpPower",
+      "wait"
+    ],
+    "source": "template",
+    "scriptName": "JumpPowerUp",
+    "subtitle": "Dočasně zvýší výšku skoku (JumpPower)"
+  },
+  {
+    "id": "ui-round-timer",
+    "title": "Odpočet kola",
+    "difficulty": "stredni",
+    "usedIn": [
+      "bonus",
+      "lava-rising"
+    ],
+    "concepts": [
+      "while",
+      "for",
+      "TextLabel"
+    ],
+    "source": "template",
+    "scriptName": "UiRoundTimer",
+    "subtitle": "Zobrazí čas kola v herním UI"
+  },
+  {
+    "id": "key-pickup",
+    "title": "Sbírání klíče",
+    "difficulty": "stredni",
+    "usedIn": [
+      "bonus",
+      "key-hunt"
+    ],
+    "concepts": [
+      "Touched",
+      "leaderstats",
+      "IntValue"
+    ],
+    "source": "template",
+    "scriptName": "KeyPickup",
+    "subtitle": "Po dotyku přičte klíč do počítadla"
+  },
+  {
+    "id": "key-door-open",
+    "title": "Dveře na klíče",
+    "difficulty": "stredni",
+    "usedIn": [
+      "bonus",
+      "key-hunt"
+    ],
+    "concepts": [
+      "if",
+      "CanCollide",
+      "Transparency"
+    ],
+    "source": "template",
+    "scriptName": "KeyDoorOpen",
+    "subtitle": "Otevře dveře po sebrání 3 klíčů"
+  },
+  {
+    "id": "key-random-spawn",
+    "title": "Náhodné klíče",
+    "difficulty": "pokrocile",
+    "usedIn": [
+      "bonus",
+      "key-hunt"
+    ],
+    "concepts": [
+      "math.random",
+      "table",
+      "Position"
+    ],
+    "source": "template",
+    "scriptName": "KeyRandomSpawn",
+    "subtitle": "Při startu rozmístí klíče na náhodné pozice"
+  },
+  {
+    "id": "key-checklist-ui",
+    "title": "Checklist klíčů",
+    "difficulty": "stredni",
+    "usedIn": [
+      "bonus",
+      "key-hunt"
+    ],
+    "concepts": [
+      "PlayerGui",
+      "TextLabel",
+      "string"
+    ],
+    "source": "template",
+    "scriptName": "KeyChecklistUi",
+    "subtitle": "V UI průběžně ukazuje stav 0/3"
+  },
+  {
+    "id": "key-sfx-lights",
+    "title": "Zvuk a světlo",
+    "difficulty": "lehke",
+    "usedIn": [
+      "bonus",
+      "key-hunt"
+    ],
+    "concepts": [
+      "Sound",
+      "PointLight",
+      "Touched"
+    ],
+    "source": "template",
+    "scriptName": "KeySfxLights",
+    "subtitle": "Po interakci spustí zvuk a světelný efekt"
+  }
+]

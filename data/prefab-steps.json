@@ -1,0 +1,801 @@
+{
+  "mizejiciblok": [
+    {
+      "id": "m1",
+      "title": "Vytvoř Script v bloku",
+      "what": "Vlož do bloku Script. Nic jiného zatím.",
+      "code": "-- Script je uvnitř bloku\n",
+      "focusLines": [1]
+    },
+    {
+      "id": "m2",
+      "title": "Chyť si blok do proměnné",
+      "what": "Napiš řádek, který si uloží blok do proměnné.",
+      "code": "local mizejiciBlok = script.Parent\n",
+      "focusLines": [1]
+    },
+    {
+      "id": "m3",
+      "title": "Udělěj funkci, která blok schová",
+      "what": "Přidej funkci zmizniBlok(): vypni kolizi a dej Transparency na 1.",
+      "code": "local mizejiciBlok = script.Parent\n\nlocal function zmizniBlok()\n\tmizejiciBlok.CanCollide = false\n\tmizejiciBlok.Transparency = 1\nend\n",
+      "focusLines": [3, 4, 5, 6]
+    },
+    {
+      "id": "m4",
+      "title": "Udělěj funkci, která blok ukáže",
+      "what": "Přidej funkci zobrazBlok(): vrať kolizi a Transparency na 0.",
+      "code": "local mizejiciBlok = script.Parent\n\nlocal function zmizniBlok()\n\tmizejiciBlok.CanCollide = false\n\tmizejiciBlok.Transparency = 1\nend\n\nlocal function zobrazBlok()\n\tmizejiciBlok.CanCollide = true\n\tmizejiciBlok.Transparency = 0\nend\n",
+      "focusLines": [8, 9, 10, 11]
+    },
+    {
+      "id": "m5",
+      "title": "Opakuj to dokola",
+      "what": "Přidej while true do, který střídá zmizniBlok a zobrazBlok.",
+      "code": "local mizejiciBlok = script.Parent\n\nlocal function zmizniBlok()\n\tmizejiciBlok.CanCollide = false\n\tmizejiciBlok.Transparency = 1\nend\n\nlocal function zobrazBlok()\n\tmizejiciBlok.CanCollide = true\n\tmizejiciBlok.Transparency = 0\nend\n\nwhile true do\n\tzmizniBlok()\n\twait(1)\n\tzobrazBlok()\n\twait(1)\nend\n",
+      "focusLines": [13, 14, 15, 16, 17, 18]
+    }
+  ],
+  "zabijhrace": [
+    {
+      "id": "k1",
+      "title": "Vytvoř Script v pasti",
+      "what": "Vlož Script do bloku, který má zabíjet.",
+      "code": "-- Script je uvnitř pasti\n",
+      "focusLines": [1]
+    },
+    {
+      "id": "k2",
+      "title": "Uděl funkci zabijHrace",
+      "what": "Když se něco dotkne bloku, přijde sem 'hit'. Najdi Humanoid a nastav Health na 0.",
+      "code": "local function zabijHrace(castHrace)\n\tlocal najdiRodice = castHrace.Parent\n\tlocal clovek = najdiRodice:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tclovek.Health = 0\n\tend\nend\n",
+      "focusLines": [1, 3, 4, 6, 7, 8, 10]
+    },
+    {
+      "id": "k3",
+      "title": "Napoj Touched na funkci",
+      "what": "Získej past = script.Parent a napoj událost.",
+      "code": "local function zabijHrace(castHrace)\n\n\tlocal najdiRodice = castHrace.Parent\n\tlocal clovek = najdiRodice:FindFirstChild(\"Humanoid\")\n\n\tif clovek then\n\t\tclovek.Health = 0\n\tend\n\nend\n\nlocal past = script.Parent\n\npast.Touched:Connect(zabijHrace)\n",
+      "focusLines": [12, 14]
+    }
+  ],
+  "coin-pickup": [
+    {
+      "id": "c1",
+      "title": "Vytvoř Script v minci",
+      "what": "Vlož Script do mince (Part).",
+      "code": "-- Script je uvnitř mince\n",
+      "focusLines": [1]
+    },
+    {
+      "id": "c2",
+      "title": "Proměnná + debounce",
+      "what": "Ulož coin a připrav uzSebrane, aby se mince nepřičetla 10×.",
+      "code": "local mince = script.Parent\nlocal uzSebrane = false\n",
+      "focusLines": [1, 2]
+    },
+    {
+      "id": "c3",
+      "title": "Najdi hráče a Coins",
+      "what": "V onTouch ověř, že se dotkla postava (Humanoid), a najdi Coins v leaderstats.",
+      "code": "local mince = script.Parent\nlocal uzSebrane = false\n\nlocal function priDotyku(dotek)\n\tif uzSebrane then return end\n\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal zebricek = hrac:FindFirstChild(\"leaderstats\")\n\tif not zebricek then return end\n\n\tlocal pocetCoinu = zebricek:FindFirstChild(\"Coins\")\n\tif not pocetCoinu then return end\nend\n",
+      "focusLines": [4, 5, 7, 8, 11, 14, 17, 18]
+    },
+    {
+      "id": "c4",
+      "title": "Přičti coin a minci smaž",
+      "what": "Coins +1, udělej minci pryč, a připoj Touched.",
+      "code": "local mince = script.Parent\nlocal uzSebrane = false\n\nlocal function priDotyku(dotek)\n\tif uzSebrane then return end\n\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal zebricek = hrac:FindFirstChild(\"leaderstats\")\n\tif not zebricek then return end\n\n\tlocal pocetCoinu = zebricek:FindFirstChild(\"Coins\")\n\tif not pocetCoinu then return end\n\n\tuzSebrane = true\n\tpocetCoinu.Value = pocetCoinu.Value + 1\n\n\t-- udělej minci „pryč“\n\tmince.Transparency = 1\n\tmince.CanCollide = false\n\tmince:Destroy()\nend\n\nmince.Touched:Connect(priDotyku)\n\n",
+      "focusLines": [20, 21, 24, 25, 26, 29]
+    }
+  ],
+  "lava-rise-core": [
+    {
+      "id": "lr1",
+      "title": "Najdi part pro lávu",
+      "what": "V mapě vytvoř červený blok a pojmenuj ho Lava.",
+      "code": "local lava = script.Parent\n",
+      "focusLines": [1]
+    },
+    {
+      "id": "lr2",
+      "title": "Nastav rychlost zvedání",
+      "what": "Přidej krok nahoru a pauzu mezi kroky.",
+      "code": "local lava = script.Parent\nlocal krokNahoru = 0.15\nlocal pauza = 1\n",
+      "focusLines": [2, 3]
+    },
+    {
+      "id": "lr3",
+      "title": "Spusť nekonečný pohyb lávy",
+      "what": "Každou sekundu lávu posuň o malý kousek nahoru.",
+      "code": "local lava = script.Parent\nlocal krokNahoru = 0.15\nlocal pauza = 1\n\nwhile true do\n\tlava.CFrame = lava.CFrame * CFrame.new(0, krokNahoru, 0)\n\twait(pauza)\nend\n",
+      "focusLines": [5, 6, 7]
+    }
+  ],
+  "key-pickup": [
+    {
+      "id": "kp1",
+      "title": "Připrav script v klíči",
+      "what": "Vlož Script do objektu klíče.",
+      "code": "local klicObjekt = script.Parent\nlocal sebrano = false\n",
+      "focusLines": [1, 2]
+    },
+    {
+      "id": "kp2",
+      "title": "Najdi hráče a leaderstats",
+      "what": "V onTouch ověř Humanoid a dohledej hráče.",
+      "code": "local klicObjekt = script.Parent\nlocal sebrano = false\n\nlocal function priDotyku(dotek)\n\tif sebrano then return end\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\nend\n",
+      "focusLines": [4, 7, 10]
+    },
+    {
+      "id": "kp3",
+      "title": "Přičti klíč a smaž objekt",
+      "what": "Zvyš počet klíčů o 1 a klíč po sebrání znič.",
+      "code": "local klicObjekt = script.Parent\nlocal sebrano = false\n\nlocal function priDotyku(dotek)\n\tif sebrano then return end\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal statistiky = hrac:FindFirstChild(\"leaderstats\")\n\tif not statistiky then return end\n\n\tlocal pocetKlicu = statistiky:FindFirstChild(\"Keys\")\n\tif not pocetKlicu then\n\t\tpocetKlicu = Instance.new(\"IntValue\")\n\t\tpocetKlicu.Name = \"Keys\"\n\t\tpocetKlicu.Value = 0\n\t\tpocetKlicu.Parent = statistiky\n\tend\n\n\tsebrano = true\n\tpocetKlicu.Value = pocetKlicu.Value + 1\n\tklicObjekt:Destroy()\nend\n\nklicObjekt.Touched:Connect(priDotyku)\n",
+      "focusLines": [15, 16, 23, 24, 27]
+    }
+  ],
+  "postupnemizejiciblok": [
+    {
+      "id": "postupnemizejiciblok-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local blok = script.Parent\n\n",
+      "focusLines": [1, 2]
+    },
+    {
+      "id": "postupnemizejiciblok-s2",
+      "title": "Začni funkci postupneZmizni",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local blok = script.Parent\n\nlocal function postupneZmizni()\n",
+      "focusLines": [3]
+    },
+    {
+      "id": "postupnemizejiciblok-s3",
+      "title": "Doplň tělo funkce postupneZmizni",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local blok = script.Parent\n\nlocal function postupneZmizni()\n\tfor krok = 1, 10 do\n\t\tblok.Transparency = krok / 10\n\t\twait(0.1)\n\tend\n\t\n\tblok.CanCollide = false\n\twait(3)\n\t\n\tblok.CanCollide = true\n\tblok.Transparency = 0\nend\n",
+      "focusLines": [4, 5, 6, 7, 8, 9, 13, 14]
+    },
+    {
+      "id": "postupnemizejiciblok-s4",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local blok = script.Parent\n\nlocal function postupneZmizni()\n\tfor krok = 1, 10 do\n\t\tblok.Transparency = krok / 10\n\t\twait(0.1)\n\tend\n\t\n\tblok.CanCollide = false\n\twait(3)\n\t\n\tblok.CanCollide = true\n\tblok.Transparency = 0\nend\n\nblok.Touched:Connect(postupneZmizni)\n",
+      "focusLines": [15, 16]
+    }
+  ],
+  "vytah": [
+    {
+      "id": "vytah-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local blok = script.Parent\n\n",
+      "focusLines": [1, 2]
+    },
+    {
+      "id": "vytah-s2",
+      "title": "Začni funkci jedNahoru",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local blok = script.Parent\n\nlocal function jedNahoru()\n",
+      "focusLines": [3]
+    },
+    {
+      "id": "vytah-s3",
+      "title": "Doplň tělo funkce jedNahoru",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local blok = script.Parent\n\nlocal function jedNahoru()\n\tfor i = 1, 50 do\n\t\tblok.CFrame = blok.CFrame * CFrame.new(0,0.3,0)\n\t\twait(0.01)\n\tend\nend\n",
+      "focusLines": [4, 5, 6, 7, 8]
+    },
+    {
+      "id": "vytah-s4",
+      "title": "Začni funkci jedDolu",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local blok = script.Parent\n\nlocal function jedNahoru()\n\tfor i = 1, 50 do\n\t\tblok.CFrame = blok.CFrame * CFrame.new(0,0.3,0)\n\t\twait(0.01)\n\tend\nend\n\nlocal function jedDolu()\n",
+      "focusLines": [9, 10]
+    },
+    {
+      "id": "vytah-s5",
+      "title": "Doplň tělo funkce jedDolu",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local blok = script.Parent\n\nlocal function jedNahoru()\n\tfor i = 1, 50 do\n\t\tblok.CFrame = blok.CFrame * CFrame.new(0,0.3,0)\n\t\twait(0.01)\n\tend\nend\n\nlocal function jedDolu()\n\tfor i = 1, 50 do\n\t\tblok.CFrame = blok.CFrame * CFrame.new(0,-0.3,0)\n\t\twait(0.01)\n\tend\nend\n",
+      "focusLines": [11, 12, 13, 14, 15]
+    },
+    {
+      "id": "vytah-s6",
+      "title": "Dokonči celý skript",
+      "what": "Zkontroluj celý kód odshora dolů a otestuj ho ve hře.",
+      "code": "local blok = script.Parent\n\nlocal function jedNahoru()\n\tfor i = 1, 50 do\n\t\tblok.CFrame = blok.CFrame * CFrame.new(0,0.3,0)\n\t\twait(0.01)\n\tend\nend\n\nlocal function jedDolu()\n\tfor i = 1, 50 do\n\t\tblok.CFrame = blok.CFrame * CFrame.new(0,-0.3,0)\n\t\twait(0.01)\n\tend\nend\n\nwhile true do\n\twait(1)\n\tjedNahoru()\n\twait(1)\n\tjedDolu()\nend\n",
+      "focusLines": [16, 17, 18, 19, 20, 21, 22]
+    }
+  ],
+  "jedovazona": [
+    {
+      "id": "jedovazona-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\n",
+      "focusLines": [1, 2, 3]
+    },
+    {
+      "id": "jedovazona-s2",
+      "title": "Začni funkci uberZivot",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function uberZivot(blok)\n",
+      "focusLines": [4]
+    },
+    {
+      "id": "jedovazona-s3",
+      "title": "Doplň tělo funkce uberZivot",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function uberZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health - 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n",
+      "focusLines": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    },
+    {
+      "id": "jedovazona-s4",
+      "title": "Doplň tělo funkce vylez",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function uberZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health - 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n\nlocal function vylez()\n\tjsemUvnitr = false\nend\n",
+      "focusLines": [15, 16, 17, 18]
+    },
+    {
+      "id": "jedovazona-s5",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function uberZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health - 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n\nlocal function vylez()\n\tjsemUvnitr = false\nend\n\nzona.Touched:Connect(uberZivot)\n",
+      "focusLines": [19, 20]
+    },
+    {
+      "id": "jedovazona-s6",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function uberZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health - 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n\nlocal function vylez()\n\tjsemUvnitr = false\nend\n\nzona.Touched:Connect(uberZivot)\nzona.TouchEnded:Connect(vylez)\n",
+      "focusLines": [21]
+    }
+  ],
+  "lecivazona": [
+    {
+      "id": "lecivazona-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\n",
+      "focusLines": [1, 2, 3]
+    },
+    {
+      "id": "lecivazona-s2",
+      "title": "Začni funkci pridejZivot",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function pridejZivot(blok)\n",
+      "focusLines": [4]
+    },
+    {
+      "id": "lecivazona-s3",
+      "title": "Doplň tělo funkce pridejZivot",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function pridejZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health + 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n",
+      "focusLines": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+    },
+    {
+      "id": "lecivazona-s4",
+      "title": "Doplň tělo funkce vylez",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function pridejZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health + 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n\nlocal function vylez()\n\tjsemUvnitr = false\nend\n",
+      "focusLines": [15, 16, 17, 18]
+    },
+    {
+      "id": "lecivazona-s5",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function pridejZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health + 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n\nlocal function vylez()\n\tjsemUvnitr = false\nend\n\nzona.Touched:Connect(pridejZivot)\n",
+      "focusLines": [19, 20]
+    },
+    {
+      "id": "lecivazona-s6",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function pridejZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health + 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n\nlocal function vylez()\n\tjsemUvnitr = false\nend\n\nzona.Touched:Connect(pridejZivot)\nzona.TouchEnded:Connect(vylez)\n",
+      "focusLines": [21]
+    }
+  ],
+  "jedpripohybu": [
+    {
+      "id": "jedpripohybu-s1",
+      "title": "Začni funkci uberZivot",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local function uberZivot(castHrace)\n",
+      "focusLines": [1]
+    },
+    {
+      "id": "jedpripohybu-s2",
+      "title": "Doplň tělo funkce uberZivot",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local function uberZivot(castHrace)\n\n\tlocal najdiRodice = castHrace.Parent\n\tlocal clovek = najdiRodice:FindFirstChild(\"Humanoid\")\n\n\tif clovek then\n\t\tclovek.Health = clovek.Health - 1\n\t\twait(3)\n\tend\n\nend\n",
+      "focusLines": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    },
+    {
+      "id": "jedpripohybu-s3",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local function uberZivot(castHrace)\n\n\tlocal najdiRodice = castHrace.Parent\n\tlocal clovek = najdiRodice:FindFirstChild(\"Humanoid\")\n\n\tif clovek then\n\t\tclovek.Health = clovek.Health - 1\n\t\twait(3)\n\tend\n\nend\n\nlocal past = script.Parent\n\npast.Touched:Connect(uberZivot)\n",
+      "focusLines": [12, 13, 14, 15]
+    }
+  ],
+  "desivytunel": [
+    {
+      "id": "desivytunel-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local baf = script.Parent.Parent:findFirstChild(\"Baf\")\nlocal bafObrazek = baf:findFirstChild(\"scary\")\n\n",
+      "focusLines": [1, 2, 3]
+    },
+    {
+      "id": "desivytunel-s2",
+      "title": "Doplň tělo funkce posouvejBaf",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local baf = script.Parent.Parent:findFirstChild(\"Baf\")\nlocal bafObrazek = baf:findFirstChild(\"scary\")\n\nlocal function posouvejBaf()\n\tfor i = 1, 30 do\n\t\tbaf.CFrame = baf.CFrame * CFrame.new(0,0,-0.3)\n\t\twait(0.001)\n\tend\nend\n",
+      "focusLines": [4, 5, 6, 7, 8, 9]
+    },
+    {
+      "id": "desivytunel-s3",
+      "title": "Doplň tělo funkce zobrazBaf",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local baf = script.Parent.Parent:findFirstChild(\"Baf\")\nlocal bafObrazek = baf:findFirstChild(\"scary\")\n\nlocal function posouvejBaf()\n\tfor i = 1, 30 do\n\t\tbaf.CFrame = baf.CFrame * CFrame.new(0,0,-0.3)\n\t\twait(0.001)\n\tend\nend\n\nlocal function zobrazBaf()\n\tbafObrazek.Transparency = 0\nend\n",
+      "focusLines": [10, 11, 12, 13]
+    },
+    {
+      "id": "desivytunel-s4",
+      "title": "Doplň tělo funkce schovejBaf",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local baf = script.Parent.Parent:findFirstChild(\"Baf\")\nlocal bafObrazek = baf:findFirstChild(\"scary\")\n\nlocal function posouvejBaf()\n\tfor i = 1, 30 do\n\t\tbaf.CFrame = baf.CFrame * CFrame.new(0,0,-0.3)\n\t\twait(0.001)\n\tend\nend\n\nlocal function zobrazBaf()\n\tbafObrazek.Transparency = 0\nend\n\nlocal function schovejBaf()\n\tbafObrazek.Transparency = 1\nend\n",
+      "focusLines": [14, 15, 16, 17]
+    },
+    {
+      "id": "desivytunel-s5",
+      "title": "Doplň tělo funkce spustPoSlapnuti",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local baf = script.Parent.Parent:findFirstChild(\"Baf\")\nlocal bafObrazek = baf:findFirstChild(\"scary\")\n\nlocal function posouvejBaf()\n\tfor i = 1, 30 do\n\t\tbaf.CFrame = baf.CFrame * CFrame.new(0,0,-0.3)\n\t\twait(0.001)\n\tend\nend\n\nlocal function zobrazBaf()\n\tbafObrazek.Transparency = 0\nend\n\nlocal function schovejBaf()\n\tbafObrazek.Transparency = 1\nend\n\nlocal function spustPoSlapnuti(castHrace)\n\tlocal rodic = castHrace.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tzobrazBaf()\n\t\tposouvejBaf()\n\t\tschovejBaf()\n\tend\nend\n",
+      "focusLines": [18, 19, 20, 21, 22, 23, 24, 25, 26, 27]
+    },
+    {
+      "id": "desivytunel-s6",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local baf = script.Parent.Parent:findFirstChild(\"Baf\")\nlocal bafObrazek = baf:findFirstChild(\"scary\")\n\nlocal function posouvejBaf()\n\tfor i = 1, 30 do\n\t\tbaf.CFrame = baf.CFrame * CFrame.new(0,0,-0.3)\n\t\twait(0.001)\n\tend\nend\n\nlocal function zobrazBaf()\n\tbafObrazek.Transparency = 0\nend\n\nlocal function schovejBaf()\n\tbafObrazek.Transparency = 1\nend\n\nlocal function spustPoSlapnuti(castHrace)\n\tlocal rodic = castHrace.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tzobrazBaf()\n\t\tposouvejBaf()\n\t\tschovejBaf()\n\tend\nend\n\nlocal zona = script.Parent\nzona.Touched:Connect(spustPoSlapnuti)\n",
+      "focusLines": [28, 29, 30]
+    }
+  ],
+  "lightning": [
+    {
+      "id": "lightning-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local cas = 0\nlocal osvetleni = game:GetService(\"Lighting\")\n\n",
+      "focusLines": [1, 2, 3]
+    },
+    {
+      "id": "lightning-s2",
+      "title": "Přidej opakování",
+      "what": "Spusť cyklus, který bude kód opakovat.",
+      "code": "local cas = 0\nlocal osvetleni = game:GetService(\"Lighting\")\n\nwhile true do\n",
+      "focusLines": [4]
+    },
+    {
+      "id": "lightning-s3",
+      "title": "Dokonči celý skript",
+      "what": "Zkontroluj celý kód odshora dolů a otestuj ho ve hře.",
+      "code": "local cas = 0\nlocal osvetleni = game:GetService(\"Lighting\")\n\nwhile true do\n\tcas = cas + 0.1\n\tif cas > 24 then\n\t\tcas = 0\n\tend\n\n\tosvetleni.ClockTime = cas\n\twait(0.1)\nend\n",
+      "focusLines": [5, 6, 7, 8, 9, 10, 11, 12]
+    }
+  ],
+  "puvodni": [
+    {
+      "id": "puvodni-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "--[[local hraci = game:GetService(\"Players\")\n\nlocal function hracSePridal(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"Zebricek\"\n\tzebricek.Parent = hrac\n\t\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Body\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\t\n\twhile true do\n\t\t\n\t\twait(1)\n\t\tlocal seznamHracu = hraci:GetPlayers()\n\n\t\tfor iterujiHrace = 1, #seznamHracu do\n\t\t\tlocal hrac = seznamHracu[iterujiHrace]\n\n\t\t\tlocal body = hrac.Zebricek.Body\t\t\t\n\t\t\tbody.Value = body.Value + 1\n\t\t\t\n\t\t\tprint(body.Value)\n\t\tend\n\tend\n\t\nend\n\nhraci.PlayerAdded:Connect(hracSePridal)\n--]]\n\n\n\nlocal sluzbaHraci = game:GetService(\"Players\")\n\n",
+      "focusLines": [1, 2, 3, 4, 5, 6, 35, 36]
+    },
+    {
+      "id": "puvodni-s2",
+      "title": "Začni funkci kdyzSePridaPostava",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "--[[local hraci = game:GetService(\"Players\")\n\nlocal function hracSePridal(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"Zebricek\"\n\tzebricek.Parent = hrac\n\t\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Body\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\t\n\twhile true do\n\t\t\n\t\twait(1)\n\t\tlocal seznamHracu = hraci:GetPlayers()\n\n\t\tfor iterujiHrace = 1, #seznamHracu do\n\t\t\tlocal hrac = seznamHracu[iterujiHrace]\n\n\t\t\tlocal body = hrac.Zebricek.Body\t\t\t\n\t\t\tbody.Value = body.Value + 1\n\t\t\t\n\t\t\tprint(body.Value)\n\t\tend\n\tend\n\t\nend\n\nhraci.PlayerAdded:Connect(hracSePridal)\n--]]\n\n\n\nlocal sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaPostava(postava, hrac)\n",
+      "focusLines": [37]
+    },
+    {
+      "id": "puvodni-s3",
+      "title": "Doplň tělo funkce kdyzSePridaPostava",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "--[[local hraci = game:GetService(\"Players\")\n\nlocal function hracSePridal(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"Zebricek\"\n\tzebricek.Parent = hrac\n\t\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Body\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\t\n\twhile true do\n\t\t\n\t\twait(1)\n\t\tlocal seznamHracu = hraci:GetPlayers()\n\n\t\tfor iterujiHrace = 1, #seznamHracu do\n\t\t\tlocal hrac = seznamHracu[iterujiHrace]\n\n\t\t\tlocal body = hrac.Zebricek.Body\t\t\t\n\t\t\tbody.Value = body.Value + 1\n\t\t\t\n\t\t\tprint(body.Value)\n\t\tend\n\tend\n\t\nend\n\nhraci.PlayerAdded:Connect(hracSePridal)\n--]]\n\n\n\nlocal sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaPostava(postava, hrac)\n\thrac:SetAttribute(\"IsAlive\", true)\n\tlocal ridicPostavy = postava:WaitForChild(\"Humanoid\")\n\tridicPostavy.Died:Connect(function()\n\t\tlocal body = hrac.leaderstats.Points\n\t\tbody.Value = 0\n\t\thrac:SetAttribute(\"IsAlive\", false)\n\tend)\nend\n",
+      "focusLines": [38, 39, 40, 41, 42, 43, 44, 45]
+    },
+    {
+      "id": "puvodni-s4",
+      "title": "Začni funkci kdyzSePridaHrac",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "--[[local hraci = game:GetService(\"Players\")\n\nlocal function hracSePridal(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"Zebricek\"\n\tzebricek.Parent = hrac\n\t\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Body\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\t\n\twhile true do\n\t\t\n\t\twait(1)\n\t\tlocal seznamHracu = hraci:GetPlayers()\n\n\t\tfor iterujiHrace = 1, #seznamHracu do\n\t\t\tlocal hrac = seznamHracu[iterujiHrace]\n\n\t\t\tlocal body = hrac.Zebricek.Body\t\t\t\n\t\t\tbody.Value = body.Value + 1\n\t\t\t\n\t\t\tprint(body.Value)\n\t\tend\n\tend\n\t\nend\n\nhraci.PlayerAdded:Connect(hracSePridal)\n--]]\n\n\n\nlocal sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaPostava(postava, hrac)\n\thrac:SetAttribute(\"IsAlive\", true)\n\tlocal ridicPostavy = postava:WaitForChild(\"Humanoid\")\n\tridicPostavy.Died:Connect(function()\n\t\tlocal body = hrac.leaderstats.Points\n\t\tbody.Value = 0\n\t\thrac:SetAttribute(\"IsAlive\", false)\n\tend)\nend\n\nlocal function kdyzSePridaHrac(hrac)\n",
+      "focusLines": [46, 47]
+    },
+    {
+      "id": "puvodni-s5",
+      "title": "Doplň tělo funkce kdyzSePridaHrac",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "--[[local hraci = game:GetService(\"Players\")\n\nlocal function hracSePridal(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"Zebricek\"\n\tzebricek.Parent = hrac\n\t\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Body\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\t\n\twhile true do\n\t\t\n\t\twait(1)\n\t\tlocal seznamHracu = hraci:GetPlayers()\n\n\t\tfor iterujiHrace = 1, #seznamHracu do\n\t\t\tlocal hrac = seznamHracu[iterujiHrace]\n\n\t\t\tlocal body = hrac.Zebricek.Body\t\t\t\n\t\t\tbody.Value = body.Value + 1\n\t\t\t\n\t\t\tprint(body.Value)\n\t\tend\n\tend\n\t\nend\n\nhraci.PlayerAdded:Connect(hracSePridal)\n--]]\n\n\n\nlocal sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaPostava(postava, hrac)\n\thrac:SetAttribute(\"IsAlive\", true)\n\tlocal ridicPostavy = postava:WaitForChild(\"Humanoid\")\n\tridicPostavy.Died:Connect(function()\n\t\tlocal body = hrac.leaderstats.Points\n\t\tbody.Value = 0\n\t\thrac:SetAttribute(\"IsAlive\", false)\n\tend)\nend\n\nlocal function kdyzSePridaHrac(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"leaderstats\"\n\tzebricek.Parent = hrac\n\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Points\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\n\thrac:SetAttribute(\"IsAlive\", false)\n\n\thrac.CharacterAdded:Connect(function(postava)\n\t\tkdyzSePridaPostava(postava, hrac)\n\tend)\nend\n",
+      "focusLines": [48, 49, 50, 51, 52, 53, 61, 62]
+    },
+    {
+      "id": "puvodni-s6",
+      "title": "Dokonči celý skript",
+      "what": "Zkontroluj celý kód odshora dolů a otestuj ho ve hře.",
+      "code": "--[[local hraci = game:GetService(\"Players\")\n\nlocal function hracSePridal(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"Zebricek\"\n\tzebricek.Parent = hrac\n\t\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Body\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\t\n\twhile true do\n\t\t\n\t\twait(1)\n\t\tlocal seznamHracu = hraci:GetPlayers()\n\n\t\tfor iterujiHrace = 1, #seznamHracu do\n\t\t\tlocal hrac = seznamHracu[iterujiHrace]\n\n\t\t\tlocal body = hrac.Zebricek.Body\t\t\t\n\t\t\tbody.Value = body.Value + 1\n\t\t\t\n\t\t\tprint(body.Value)\n\t\tend\n\tend\n\t\nend\n\nhraci.PlayerAdded:Connect(hracSePridal)\n--]]\n\n\n\nlocal sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaPostava(postava, hrac)\n\thrac:SetAttribute(\"IsAlive\", true)\n\tlocal ridicPostavy = postava:WaitForChild(\"Humanoid\")\n\tridicPostavy.Died:Connect(function()\n\t\tlocal body = hrac.leaderstats.Points\n\t\tbody.Value = 0\n\t\thrac:SetAttribute(\"IsAlive\", false)\n\tend)\nend\n\nlocal function kdyzSePridaHrac(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"leaderstats\"\n\tzebricek.Parent = hrac\n\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Points\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\n\thrac:SetAttribute(\"IsAlive\", false)\n\n\thrac.CharacterAdded:Connect(function(postava)\n\t\tkdyzSePridaPostava(postava, hrac)\n\tend)\nend\n\nsluzbaHraci.PlayerAdded:Connect(kdyzSePridaHrac)\n\nwhile true do\n\twait(1)\n\tlocal seznamHracu = sluzbaHraci:GetPlayers()\n\tfor i = 1, #seznamHracu  do\n\t\tlocal hrac = seznamHracu[i]\n\t\tif hrac:GetAttribute(\"IsAlive\") then\n\t\t\tlocal body = hrac.leaderstats.Points\n\t\t\tbody.Value = body.Value + 1\n\t\tend\n\tend\nend\n",
+      "focusLines": [63, 64, 65, 66, 67, 68, 75, 76]
+    }
+  ],
+  "bodyrychleji": [
+    {
+      "id": "bodyrychleji-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "-- nápady na zlepšení: synchronizovat čas přes tween service, ať to nepřidává body navíc za každou část těla, co se dotkla\n\nlocal blok = script.Parent\n\nlocal jsemUvnitr = false\nblok.Color = Color3.new(1, .4, .2)\n\n",
+      "focusLines": [1, 2, 3, 4, 5, 6, 7]
+    },
+    {
+      "id": "bodyrychleji-s2",
+      "title": "Začni funkci pridejBodyHraci",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "-- nápady na zlepšení: synchronizovat čas přes tween service, ať to nepřidává body navíc za každou část těla, co se dotkla\n\nlocal blok = script.Parent\n\nlocal jsemUvnitr = false\nblok.Color = Color3.new(1, .4, .2)\n\nlocal function pridejBodyHraci(jmenoHrace)\n",
+      "focusLines": [8]
+    },
+    {
+      "id": "bodyrychleji-s3",
+      "title": "Doplň tělo funkce pridejBodyHraci",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "-- nápady na zlepšení: synchronizovat čas přes tween service, ať to nepřidává body navíc za každou část těla, co se dotkla\n\nlocal blok = script.Parent\n\nlocal jsemUvnitr = false\nblok.Color = Color3.new(1, .4, .2)\n\nlocal function pridejBodyHraci(jmenoHrace)\n\tlocal hraci = game:GetService(\"Players\")\n\tlocal seznamHracu = hraci:GetPlayers()\n\n\tfor i = 1, #seznamHracu  do\n\t\tlocal hracZeSeznamu = seznamHracu[i]\n\t\tlocal jeToNasHrac = hracZeSeznamu.Name == jmenoHrace\n\n\t\tif jeToNasHrac then\n\t\t\tlocal body = hracZeSeznamu.leaderstats.Points\n\t\t\tbody.Value = body.Value + 1\n\t\tend\n\tend\nend\n",
+      "focusLines": [9, 10, 11, 12, 13, 14, 20, 21]
+    },
+    {
+      "id": "bodyrychleji-s4",
+      "title": "Doplň tělo funkce pridavejBodyNavic",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "-- nápady na zlepšení: synchronizovat čas přes tween service, ať to nepřidává body navíc za každou část těla, co se dotkla\n\nlocal blok = script.Parent\n\nlocal jsemUvnitr = false\nblok.Color = Color3.new(1, .4, .2)\n\nlocal function pridejBodyHraci(jmenoHrace)\n\tlocal hraci = game:GetService(\"Players\")\n\tlocal seznamHracu = hraci:GetPlayers()\n\n\tfor i = 1, #seznamHracu  do\n\t\tlocal hracZeSeznamu = seznamHracu[i]\n\t\tlocal jeToNasHrac = hracZeSeznamu.Name == jmenoHrace\n\n\t\tif jeToNasHrac then\n\t\t\tlocal body = hracZeSeznamu.leaderstats.Points\n\t\t\tbody.Value = body.Value + 1\n\t\tend\n\tend\nend\n\nlocal function pridavejBodyNavic(castTelaCoSeDotkla)\n\tlocal celekTela = castTelaCoSeDotkla.Parent\n\tlocal jeToClovek = celekTela:FindFirstChild(\"Humanoid\")\n\t\n\tif jeToClovek then\n\t\tjsemUvnitr = true\n\t\tblok.Color = Color3.new(.4, 1, .2)\n\t\t\n\t\twhile jsemUvnitr do\n\t\t\twait(1)\n\t\t\tlocal jmenoCloveka = celekTela.Name\n\t\t\tpridejBodyHraci(jmenoCloveka)\n\t\tend\n\tend\n\t\nend\n",
+      "focusLines": [22, 23, 24, 25, 26, 27, 37, 38]
+    },
+    {
+      "id": "bodyrychleji-s5",
+      "title": "Doplň tělo funkce prestanPridavatBody",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "-- nápady na zlepšení: synchronizovat čas přes tween service, ať to nepřidává body navíc za každou část těla, co se dotkla\n\nlocal blok = script.Parent\n\nlocal jsemUvnitr = false\nblok.Color = Color3.new(1, .4, .2)\n\nlocal function pridejBodyHraci(jmenoHrace)\n\tlocal hraci = game:GetService(\"Players\")\n\tlocal seznamHracu = hraci:GetPlayers()\n\n\tfor i = 1, #seznamHracu  do\n\t\tlocal hracZeSeznamu = seznamHracu[i]\n\t\tlocal jeToNasHrac = hracZeSeznamu.Name == jmenoHrace\n\n\t\tif jeToNasHrac then\n\t\t\tlocal body = hracZeSeznamu.leaderstats.Points\n\t\t\tbody.Value = body.Value + 1\n\t\tend\n\tend\nend\n\nlocal function pridavejBodyNavic(castTelaCoSeDotkla)\n\tlocal celekTela = castTelaCoSeDotkla.Parent\n\tlocal jeToClovek = celekTela:FindFirstChild(\"Humanoid\")\n\t\n\tif jeToClovek then\n\t\tjsemUvnitr = true\n\t\tblok.Color = Color3.new(.4, 1, .2)\n\t\t\n\t\twhile jsemUvnitr do\n\t\t\twait(1)\n\t\t\tlocal jmenoCloveka = celekTela.Name\n\t\t\tpridejBodyHraci(jmenoCloveka)\n\t\tend\n\tend\n\t\nend\n\nlocal function prestanPridavatBody()\n\tjsemUvnitr = false\n\tblok.Color = Color3.new(1, .4, .2)\nend\n",
+      "focusLines": [39, 40, 41, 42, 43]
+    },
+    {
+      "id": "bodyrychleji-s6",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "-- nápady na zlepšení: synchronizovat čas přes tween service, ať to nepřidává body navíc za každou část těla, co se dotkla\n\nlocal blok = script.Parent\n\nlocal jsemUvnitr = false\nblok.Color = Color3.new(1, .4, .2)\n\nlocal function pridejBodyHraci(jmenoHrace)\n\tlocal hraci = game:GetService(\"Players\")\n\tlocal seznamHracu = hraci:GetPlayers()\n\n\tfor i = 1, #seznamHracu  do\n\t\tlocal hracZeSeznamu = seznamHracu[i]\n\t\tlocal jeToNasHrac = hracZeSeznamu.Name == jmenoHrace\n\n\t\tif jeToNasHrac then\n\t\t\tlocal body = hracZeSeznamu.leaderstats.Points\n\t\t\tbody.Value = body.Value + 1\n\t\tend\n\tend\nend\n\nlocal function pridavejBodyNavic(castTelaCoSeDotkla)\n\tlocal celekTela = castTelaCoSeDotkla.Parent\n\tlocal jeToClovek = celekTela:FindFirstChild(\"Humanoid\")\n\t\n\tif jeToClovek then\n\t\tjsemUvnitr = true\n\t\tblok.Color = Color3.new(.4, 1, .2)\n\t\t\n\t\twhile jsemUvnitr do\n\t\t\twait(1)\n\t\t\tlocal jmenoCloveka = celekTela.Name\n\t\t\tpridejBodyHraci(jmenoCloveka)\n\t\tend\n\tend\n\t\nend\n\nlocal function prestanPridavatBody()\n\tjsemUvnitr = false\n\tblok.Color = Color3.new(1, .4, .2)\nend\n\nblok.Touched:Connect(pridavejBodyNavic)\nblok.TouchEnded:Connect(prestanPridavatBody)\n",
+      "focusLines": [44, 45, 46]
+    }
+  ],
+  "leaderstats-coins": [
+    {
+      "id": "leaderstats-coins-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local sluzbaHraci = game:GetService(\"Players\")\n\n",
+      "focusLines": [1, 2]
+    },
+    {
+      "id": "leaderstats-coins-s2",
+      "title": "Začni funkci kdyzSePridaHrac",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaHrac(hrac)\n",
+      "focusLines": [3]
+    },
+    {
+      "id": "leaderstats-coins-s3",
+      "title": "Doplň tělo funkce kdyzSePridaHrac",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaHrac(hrac)\n\t-- leaderstats = speciální složka, kterou Roblox ukáže v tabulce hráčů\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"leaderstats\"\n\tzebricek.Parent = hrac\n\n\tlocal pocetCoinu = Instance.new(\"IntValue\")\n\tpocetCoinu.Name = \"Coins\"\n\tpocetCoinu.Value = 0\n\tpocetCoinu.Parent = zebricek\nend\n",
+      "focusLines": [4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    },
+    {
+      "id": "leaderstats-coins-s4",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaHrac(hrac)\n\t-- leaderstats = speciální složka, kterou Roblox ukáže v tabulce hráčů\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"leaderstats\"\n\tzebricek.Parent = hrac\n\n\tlocal pocetCoinu = Instance.new(\"IntValue\")\n\tpocetCoinu.Name = \"Coins\"\n\tpocetCoinu.Value = 0\n\tpocetCoinu.Parent = zebricek\nend\n\nsluzbaHraci.PlayerAdded:Connect(kdyzSePridaHrac)\n",
+      "focusLines": [14, 15]
+    }
+  ],
+  "checkpoint": [
+    {
+      "id": "checkpoint-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "-- Tento script dej DO SpawnLocation, který je checkpoint.\n-- Tip: checkpointy pojmenuj třeba Checkpoint1, Checkpoint2...\n\nlocal kontrolniBod = script.Parent -- SpawnLocation\n\n",
+      "focusLines": [1, 2, 3, 4, 5]
+    },
+    {
+      "id": "checkpoint-s2",
+      "title": "Začni funkci priDotyku",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "-- Tento script dej DO SpawnLocation, který je checkpoint.\n-- Tip: checkpointy pojmenuj třeba Checkpoint1, Checkpoint2...\n\nlocal kontrolniBod = script.Parent -- SpawnLocation\n\nlocal function priDotyku(dotek)\n",
+      "focusLines": [6]
+    },
+    {
+      "id": "checkpoint-s3",
+      "title": "Doplň tělo funkce priDotyku",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "-- Tento script dej DO SpawnLocation, který je checkpoint.\n-- Tip: checkpointy pojmenuj třeba Checkpoint1, Checkpoint2...\n\nlocal kontrolniBod = script.Parent -- SpawnLocation\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\thrac.RespawnLocation = kontrolniBod\nend\n",
+      "focusLines": [7, 8, 9, 10, 11, 12, 13, 14, 15]
+    },
+    {
+      "id": "checkpoint-s4",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "-- Tento script dej DO SpawnLocation, který je checkpoint.\n-- Tip: checkpointy pojmenuj třeba Checkpoint1, Checkpoint2...\n\nlocal kontrolniBod = script.Parent -- SpawnLocation\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\thrac.RespawnLocation = kontrolniBod\nend\n\nkontrolniBod.Touched:Connect(priDotyku)\n",
+      "focusLines": [16, 17]
+    }
+  ],
+  "blink-warning": [
+    {
+      "id": "blink-warning-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local blok = script.Parent\n\n",
+      "focusLines": [1, 2]
+    },
+    {
+      "id": "blink-warning-s2",
+      "title": "Přidej opakování",
+      "what": "Spusť cyklus, který bude kód opakovat.",
+      "code": "local blok = script.Parent\n\nwhile true do\n",
+      "focusLines": [3]
+    },
+    {
+      "id": "blink-warning-s3",
+      "title": "Dokonči celý skript",
+      "what": "Zkontroluj celý kód odshora dolů a otestuj ho ve hře.",
+      "code": "local blok = script.Parent\n\nwhile true do\n\tblok.Transparency = 0\n\twait(0.2)\n\tblok.Transparency = 0.7\n\twait(0.2)\nend\n",
+      "focusLines": [4, 5, 6, 7, 8]
+    }
+  ],
+  "finish-win": [
+    {
+      "id": "finish-win-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local cil = script.Parent\nlocal potrebneCoiny = 10 -- změň na 0, pokud nechceš kontrolu coinů\n\n",
+      "focusLines": [1, 2, 3]
+    },
+    {
+      "id": "finish-win-s2",
+      "title": "Začni funkci ukazVyhru",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local cil = script.Parent\nlocal potrebneCoiny = 10 -- změň na 0, pokud nechceš kontrolu coinů\n\nlocal function ukazVyhru(hrac)\n",
+      "focusLines": [4]
+    },
+    {
+      "id": "finish-win-s3",
+      "title": "Doplň tělo funkce ukazVyhru",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local cil = script.Parent\nlocal potrebneCoiny = 10 -- změň na 0, pokud nechceš kontrolu coinů\n\nlocal function ukazVyhru(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\tif rozhraniHrace:FindFirstChild(\"WinGui\") then return end\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"WinGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(1, 0, 0.2, 0)\n\tnapis.Position = UDim2.new(0, 0, 0.4, 0)\n\tnapis.BackgroundTransparency = 1\n\tnapis.TextScaled = true\n\tnapis.Text = \"Vyhrál jsi! 🎉\"\n\tnapis.Parent = obrazovka\nend\n",
+      "focusLines": [5, 6, 7, 8, 9, 10, 19, 20]
+    },
+    {
+      "id": "finish-win-s4",
+      "title": "Začni funkci priDotyku",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local cil = script.Parent\nlocal potrebneCoiny = 10 -- změň na 0, pokud nechceš kontrolu coinů\n\nlocal function ukazVyhru(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\tif rozhraniHrace:FindFirstChild(\"WinGui\") then return end\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"WinGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(1, 0, 0.2, 0)\n\tnapis.Position = UDim2.new(0, 0, 0.4, 0)\n\tnapis.BackgroundTransparency = 1\n\tnapis.TextScaled = true\n\tnapis.Text = \"Vyhrál jsi! 🎉\"\n\tnapis.Parent = obrazovka\nend\n\nlocal function priDotyku(dotek)\n",
+      "focusLines": [21, 22]
+    },
+    {
+      "id": "finish-win-s5",
+      "title": "Doplň tělo funkce priDotyku",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local cil = script.Parent\nlocal potrebneCoiny = 10 -- změň na 0, pokud nechceš kontrolu coinů\n\nlocal function ukazVyhru(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\tif rozhraniHrace:FindFirstChild(\"WinGui\") then return end\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"WinGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(1, 0, 0.2, 0)\n\tnapis.Position = UDim2.new(0, 0, 0.4, 0)\n\tnapis.BackgroundTransparency = 1\n\tnapis.TextScaled = true\n\tnapis.Text = \"Vyhrál jsi! 🎉\"\n\tnapis.Parent = obrazovka\nend\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tif potrebneCoiny > 0 then\n\t\tlocal zebricek = hrac:FindFirstChild(\"leaderstats\")\n\t\tlocal pocetCoinu = zebricek and zebricek:FindFirstChild(\"Coins\")\n\t\tif not pocetCoinu or pocetCoinu.Value < potrebneCoiny then\n\t\t\treturn\n\t\tend\n\tend\n\n\tukazVyhru(hrac)\nend\n",
+      "focusLines": [23, 24, 25, 26, 27, 28, 38, 39]
+    },
+    {
+      "id": "finish-win-s6",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local cil = script.Parent\nlocal potrebneCoiny = 10 -- změň na 0, pokud nechceš kontrolu coinů\n\nlocal function ukazVyhru(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\tif rozhraniHrace:FindFirstChild(\"WinGui\") then return end\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"WinGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(1, 0, 0.2, 0)\n\tnapis.Position = UDim2.new(0, 0, 0.4, 0)\n\tnapis.BackgroundTransparency = 1\n\tnapis.TextScaled = true\n\tnapis.Text = \"Vyhrál jsi! 🎉\"\n\tnapis.Parent = obrazovka\nend\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tif potrebneCoiny > 0 then\n\t\tlocal zebricek = hrac:FindFirstChild(\"leaderstats\")\n\t\tlocal pocetCoinu = zebricek and zebricek:FindFirstChild(\"Coins\")\n\t\tif not pocetCoinu or pocetCoinu.Value < potrebneCoiny then\n\t\t\treturn\n\t\tend\n\tend\n\n\tukazVyhru(hrac)\nend\n\ncil.Touched:Connect(priDotyku)\n",
+      "focusLines": [40, 41]
+    }
+  ],
+  "lava-safe-zone-win": [
+    {
+      "id": "lava-safe-zone-win-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local bezpecnaZona = script.Parent\n\n",
+      "focusLines": [1, 2]
+    },
+    {
+      "id": "lava-safe-zone-win-s2",
+      "title": "Začni funkci priDotyku",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local bezpecnaZona = script.Parent\n\nlocal function priDotyku(dotek)\n",
+      "focusLines": [3]
+    },
+    {
+      "id": "lava-safe-zone-win-s3",
+      "title": "Doplň tělo funkce priDotyku",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local bezpecnaZona = script.Parent\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal obrazovka = hrac:WaitForChild(\"PlayerGui\")\n\tif obrazovka:FindFirstChild(\"SafeWinGui\") then return end\n\n\tlocal obrazovkaVrstva = Instance.new(\"ScreenGui\")\n\tobrazovkaVrstva.Name = \"SafeWinGui\"\n\tobrazovkaVrstva.Parent = obrazovka\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(1, 0, 0.18, 0)\n\tnapis.Position = UDim2.new(0, 0, 0.4, 0)\n\tnapis.BackgroundTransparency = 1\n\tnapis.TextScaled = true\n\tnapis.Text = \"Jsi v safe zóně!\"\n\tnapis.Parent = obrazovkaVrstva\nend\n",
+      "focusLines": [4, 5, 6, 7, 8, 9, 24, 25]
+    },
+    {
+      "id": "lava-safe-zone-win-s4",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local bezpecnaZona = script.Parent\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal obrazovka = hrac:WaitForChild(\"PlayerGui\")\n\tif obrazovka:FindFirstChild(\"SafeWinGui\") then return end\n\n\tlocal obrazovkaVrstva = Instance.new(\"ScreenGui\")\n\tobrazovkaVrstva.Name = \"SafeWinGui\"\n\tobrazovkaVrstva.Parent = obrazovka\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(1, 0, 0.18, 0)\n\tnapis.Position = UDim2.new(0, 0, 0.4, 0)\n\tnapis.BackgroundTransparency = 1\n\tnapis.TextScaled = true\n\tnapis.Text = \"Jsi v safe zóně!\"\n\tnapis.Parent = obrazovkaVrstva\nend\n\nbezpecnaZona.Touched:Connect(priDotyku)\n",
+      "focusLines": [26, 27]
+    }
+  ],
+  "jump-powerup": [
+    {
+      "id": "jump-powerup-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local bonusObjekt = script.Parent\nlocal bonusSkok = 90\nlocal trvani = 8\n\n",
+      "focusLines": [1, 2, 3, 4]
+    },
+    {
+      "id": "jump-powerup-s2",
+      "title": "Začni funkci priDotyku",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local bonusObjekt = script.Parent\nlocal bonusSkok = 90\nlocal trvani = 8\n\nlocal function priDotyku(dotek)\n",
+      "focusLines": [5]
+    },
+    {
+      "id": "jump-powerup-s3",
+      "title": "Doplň tělo funkce priDotyku",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local bonusObjekt = script.Parent\nlocal bonusSkok = 90\nlocal trvani = 8\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal puvodni = ridicPostavy.JumpPower\n\tridicPostavy.JumpPower = bonusSkok\n\twait(trvani)\n\tridicPostavy.JumpPower = puvodni\nend\n",
+      "focusLines": [6, 7, 8, 9, 10, 11, 12, 13, 14]
+    },
+    {
+      "id": "jump-powerup-s4",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local bonusObjekt = script.Parent\nlocal bonusSkok = 90\nlocal trvani = 8\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal puvodni = ridicPostavy.JumpPower\n\tridicPostavy.JumpPower = bonusSkok\n\twait(trvani)\n\tridicPostavy.JumpPower = puvodni\nend\n\nbonusObjekt.Touched:Connect(priDotyku)\n",
+      "focusLines": [15, 16]
+    }
+  ],
+  "ui-round-timer": [
+    {
+      "id": "ui-round-timer-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local delkaKola = 60\n\n",
+      "focusLines": [1, 2]
+    },
+    {
+      "id": "ui-round-timer-s2",
+      "title": "Začni funkci pridejCasovacRozhrani",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local delkaKola = 60\n\nlocal function pridejCasovacRozhrani(hrac)\n",
+      "focusLines": [3]
+    },
+    {
+      "id": "ui-round-timer-s3",
+      "title": "Doplň tělo funkce pridejCasovacRozhrani",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local delkaKola = 60\n\nlocal function pridejCasovacRozhrani(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"RoundTimerGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Name = \"TimerLabel\"\n\tnapis.Size = UDim2.new(0.25, 0, 0.08, 0)\n\tnapis.Position = UDim2.new(0.02, 0, 0.02, 0)\n\tnapis.TextScaled = true\n\tnapis.Text = \"Čas: \" .. delkaKola\n\tnapis.Parent = obrazovka\n\n\tfor sekunda = delkaKola, 0, -1 do\n\t\tnapis.Text = \"Čas: \" .. sekunda\n\t\twait(1)\n\tend\nend\n",
+      "focusLines": [4, 5, 6, 7, 8, 9, 22, 23]
+    },
+    {
+      "id": "ui-round-timer-s4",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local delkaKola = 60\n\nlocal function pridejCasovacRozhrani(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"RoundTimerGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Name = \"TimerLabel\"\n\tnapis.Size = UDim2.new(0.25, 0, 0.08, 0)\n\tnapis.Position = UDim2.new(0.02, 0, 0.02, 0)\n\tnapis.TextScaled = true\n\tnapis.Text = \"Čas: \" .. delkaKola\n\tnapis.Parent = obrazovka\n\n\tfor sekunda = delkaKola, 0, -1 do\n\t\tnapis.Text = \"Čas: \" .. sekunda\n\t\twait(1)\n\tend\nend\n\ngame.Players.PlayerAdded:Connect(pridejCasovacRozhrani)\n",
+      "focusLines": [24, 25]
+    }
+  ],
+  "key-door-open": [
+    {
+      "id": "key-door-open-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local dvere = script.Parent\nlocal potrebaKlicu = 3\n\n",
+      "focusLines": [1, 2, 3]
+    },
+    {
+      "id": "key-door-open-s2",
+      "title": "Začni funkci priDotyku",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local dvere = script.Parent\nlocal potrebaKlicu = 3\n\nlocal function priDotyku(dotek)\n",
+      "focusLines": [4]
+    },
+    {
+      "id": "key-door-open-s3",
+      "title": "Doplň tělo funkce priDotyku",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local dvere = script.Parent\nlocal potrebaKlicu = 3\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal statistiky = hrac:FindFirstChild(\"leaderstats\")\n\tlocal pocetKlicu = statistiky and statistiky:FindFirstChild(\"Keys\")\n\n\tif pocetKlicu and pocetKlicu.Value >= potrebaKlicu then\n\t\tdvere.CanCollide = false\n\t\tdvere.Transparency = 0.8\n\tend\nend\n",
+      "focusLines": [5, 6, 7, 8, 9, 10, 18, 19]
+    },
+    {
+      "id": "key-door-open-s4",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local dvere = script.Parent\nlocal potrebaKlicu = 3\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal statistiky = hrac:FindFirstChild(\"leaderstats\")\n\tlocal pocetKlicu = statistiky and statistiky:FindFirstChild(\"Keys\")\n\n\tif pocetKlicu and pocetKlicu.Value >= potrebaKlicu then\n\t\tdvere.CanCollide = false\n\t\tdvere.Transparency = 0.8\n\tend\nend\n\ndvere.Touched:Connect(priDotyku)\n",
+      "focusLines": [20, 21]
+    }
+  ],
+  "key-random-spawn": [
+    {
+      "id": "key-random-spawn-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local slozkaKlicu = workspace:WaitForChild(\"Keys\")\nlocal slozkaPozic = workspace:WaitForChild(\"KeySpawns\")\n\nlocal poziceSpawnu = slozkaPozic:GetChildren()\nlocal pocetKlicu = slozkaKlicu:GetChildren()\n\n",
+      "focusLines": [1, 2, 3, 4, 5, 6]
+    },
+    {
+      "id": "key-random-spawn-s2",
+      "title": "Přidej opakování",
+      "what": "Spusť cyklus, který bude kód opakovat.",
+      "code": "local slozkaKlicu = workspace:WaitForChild(\"Keys\")\nlocal slozkaPozic = workspace:WaitForChild(\"KeySpawns\")\n\nlocal poziceSpawnu = slozkaPozic:GetChildren()\nlocal pocetKlicu = slozkaKlicu:GetChildren()\n\nfor i = 1, #pocetKlicu do\n",
+      "focusLines": [7]
+    },
+    {
+      "id": "key-random-spawn-s3",
+      "title": "Dokonči celý skript",
+      "what": "Zkontroluj celý kód odshora dolů a otestuj ho ve hře.",
+      "code": "local slozkaKlicu = workspace:WaitForChild(\"Keys\")\nlocal slozkaPozic = workspace:WaitForChild(\"KeySpawns\")\n\nlocal poziceSpawnu = slozkaPozic:GetChildren()\nlocal pocetKlicu = slozkaKlicu:GetChildren()\n\nfor i = 1, #pocetKlicu do\n\tlocal poradiPozice = math.random(1, #poziceSpawnu)\n\tlocal cilovaPozice = poziceSpawnu[poradiPozice]\n\tpocetKlicu[i].Position = cilovaPozice.Position\nend\n",
+      "focusLines": [8, 9, 10, 11]
+    }
+  ],
+  "key-checklist-ui": [
+    {
+      "id": "key-checklist-ui-s1",
+      "title": "Začni funkci pridejRozhrani",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local function pridejRozhrani(hrac)\n",
+      "focusLines": [1]
+    },
+    {
+      "id": "key-checklist-ui-s2",
+      "title": "Doplň tělo funkce pridejRozhrani",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local function pridejRozhrani(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"KeyChecklistGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(0.3, 0, 0.09, 0)\n\tnapis.Position = UDim2.new(0.02, 0, 0.12, 0)\n\tnapis.TextScaled = true\n\tnapis.Text = \"Klíče: 0/3\"\n\tnapis.Parent = obrazovka\n\n\twhile true do\n\t\twait(0.2)\n\t\tlocal statistiky = hrac:FindFirstChild(\"leaderstats\")\n\t\tlocal pocetKlicu = statistiky and statistiky:FindFirstChild(\"Keys\")\n\t\tlocal hodnota = pocetKlicu and pocetKlicu.Value or 0\n\t\tnapis.Text = \"Klíče: \" .. hodnota .. \"/3\"\n\tend\nend\n",
+      "focusLines": [2, 3, 4, 5, 6, 7, 22, 23]
+    },
+    {
+      "id": "key-checklist-ui-s3",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local function pridejRozhrani(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"KeyChecklistGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(0.3, 0, 0.09, 0)\n\tnapis.Position = UDim2.new(0.02, 0, 0.12, 0)\n\tnapis.TextScaled = true\n\tnapis.Text = \"Klíče: 0/3\"\n\tnapis.Parent = obrazovka\n\n\twhile true do\n\t\twait(0.2)\n\t\tlocal statistiky = hrac:FindFirstChild(\"leaderstats\")\n\t\tlocal pocetKlicu = statistiky and statistiky:FindFirstChild(\"Keys\")\n\t\tlocal hodnota = pocetKlicu and pocetKlicu.Value or 0\n\t\tnapis.Text = \"Klíče: \" .. hodnota .. \"/3\"\n\tend\nend\n\ngame.Players.PlayerAdded:Connect(pridejRozhrani)\n",
+      "focusLines": [24, 25]
+    }
+  ],
+  "key-sfx-lights": [
+    {
+      "id": "key-sfx-lights-s1",
+      "title": "Připrav proměnné",
+      "what": "Ulož důležité objekty a hodnoty do proměnných, ať se s nimi pracuje jednoduše.",
+      "code": "local spinac = script.Parent\nlocal zvuk = spinac:FindFirstChild(\"KeySound\")\nlocal svetlo = spinac:FindFirstChild(\"PointLight\")\n\n",
+      "focusLines": [1, 2, 3, 4]
+    },
+    {
+      "id": "key-sfx-lights-s2",
+      "title": "Začni funkci priDotyku",
+      "what": "Přidej hlavičku funkce. Tělo funkce doplníš v dalším kroku.",
+      "code": "local spinac = script.Parent\nlocal zvuk = spinac:FindFirstChild(\"KeySound\")\nlocal svetlo = spinac:FindFirstChild(\"PointLight\")\n\nlocal function priDotyku(dotek)\n",
+      "focusLines": [5]
+    },
+    {
+      "id": "key-sfx-lights-s3",
+      "title": "Doplň tělo funkce priDotyku",
+      "what": "Dopiš vnitřek funkce shora dolů, včetně podmínek a akcí.",
+      "code": "local spinac = script.Parent\nlocal zvuk = spinac:FindFirstChild(\"KeySound\")\nlocal svetlo = spinac:FindFirstChild(\"PointLight\")\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tif zvuk then\n\t\tzvuk:Play()\n\tend\n\n\tif svetlo then\n\t\tsvetlo.Enabled = true\n\t\twait(0.4)\n\t\tsvetlo.Enabled = false\n\tend\nend\n",
+      "focusLines": [6, 7, 8, 9, 10, 11, 18, 19]
+    },
+    {
+      "id": "key-sfx-lights-s4",
+      "title": "Propoj událost s funkcí",
+      "what": "Napoj :Connect, aby se funkce spouštěla ve správný moment.",
+      "code": "local spinac = script.Parent\nlocal zvuk = spinac:FindFirstChild(\"KeySound\")\nlocal svetlo = spinac:FindFirstChild(\"PointLight\")\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tif zvuk then\n\t\tzvuk:Play()\n\tend\n\n\tif svetlo then\n\t\tsvetlo.Enabled = true\n\t\twait(0.4)\n\t\tsvetlo.Enabled = false\n\tend\nend\n\nspinac.Touched:Connect(priDotyku)\n",
+      "focusLines": [20, 21]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+[
+  {
+    "prefabId": "mizejiciblok",
+    "source": "animace.rbxl",
+    "code": "local mizejiciBlok = script.Parent\n\nlocal function zmizniBlok()\n\tmizejiciBlok.CanCollide = false\n\tmizejiciBlok.Transparency = 1\nend\n\nlocal function zobrazBlok()\n\tmizejiciBlok.CanCollide = true\n\tmizejiciBlok.Transparency = 0\nend\n\nwhile true do\n\tzmizniBlok()\n\twait(1)\n\tzobrazBlok()\n\twait(1)\nend\n"
+  },
+  {
+    "prefabId": "postupnemizejiciblok",
+    "source": "animace.rbxl",
+    "code": "local blok = script.Parent\n\nlocal function postupneZmizni()\n\tfor krok = 1, 10 do\n\t\tblok.Transparency = krok / 10\n\t\twait(0.1)\n\tend\n\t\n\tblok.CanCollide = false\n\twait(3)\n\t\n\tblok.CanCollide = true\n\tblok.Transparency = 0\nend\n\nblok.Touched:Connect(postupneZmizni)\n"
+  },
+  {
+    "prefabId": "zabijhrace",
+    "source": "animace.rbxl",
+    "code": "local function zabijHrace(castHrace)\n\n\tlocal najdiRodice = castHrace.Parent\n\tlocal clovek = najdiRodice:FindFirstChild(\"Humanoid\")\n\n\tif clovek then\n\t\tclovek.Health = 0\n\tend\n\nend\n\nlocal past = script.Parent\n\npast.Touched:Connect(zabijHrace)\n"
+  },
+  {
+    "prefabId": "vytah",
+    "source": "animace.rbxl",
+    "code": "local blok = script.Parent\n\nlocal function jedNahoru()\n\tfor i = 1, 50 do\n\t\tblok.CFrame = blok.CFrame * CFrame.new(0,0.3,0)\n\t\twait(0.01)\n\tend\nend\n\nlocal function jedDolu()\n\tfor i = 1, 50 do\n\t\tblok.CFrame = blok.CFrame * CFrame.new(0,-0.3,0)\n\t\twait(0.01)\n\tend\nend\n\nwhile true do\n\twait(1)\n\tjedNahoru()\n\twait(1)\n\tjedDolu()\nend\n"
+  },
+  {
+    "prefabId": "rotace",
+    "source": "animace.rbxl",
+    "code": "local blok = script.Parent\n\nwhile true do\n\twait()\n\tblok.CFrame = blok.CFrame * CFrame.fromEulerAnglesXYZ(0.1,0,0)\nend\n"
+  },
+  {
+    "prefabId": "jedovazona",
+    "source": "animace.rbxl",
+    "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function uberZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health - 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n\nlocal function vylez()\n\tjsemUvnitr = false\nend\n\nzona.Touched:Connect(uberZivot)\nzona.TouchEnded:Connect(vylez)\n"
+  },
+  {
+    "prefabId": "lecivazona",
+    "source": "animace.rbxl",
+    "code": "local zona = script.Parent\nlocal jsemUvnitr = false\n\nlocal function pridejZivot(blok)\n\tlocal rodic = blok.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tjsemUvnitr = true\n\t\twhile jsemUvnitr do\n\t\t\tclovek.Health = clovek.Health + 2\n\t\t\twait(0.3)\n\t\tend\n\tend\nend\n\nlocal function vylez()\n\tjsemUvnitr = false\nend\n\nzona.Touched:Connect(pridejZivot)\nzona.TouchEnded:Connect(vylez)\n"
+  },
+  {
+    "prefabId": "jedpripohybu",
+    "source": "animace.rbxl",
+    "code": "local function uberZivot(castHrace)\n\n\tlocal najdiRodice = castHrace.Parent\n\tlocal clovek = najdiRodice:FindFirstChild(\"Humanoid\")\n\n\tif clovek then\n\t\tclovek.Health = clovek.Health - 1\n\t\twait(3)\n\tend\n\nend\n\nlocal past = script.Parent\n\npast.Touched:Connect(uberZivot)\n"
+  },
+  {
+    "prefabId": "desivytunel",
+    "source": "animace.rbxl",
+    "code": "local baf = script.Parent.Parent:findFirstChild(\"Baf\")\nlocal bafObrazek = baf:findFirstChild(\"scary\")\n\nlocal function posouvejBaf()\n\tfor i = 1, 30 do\n\t\tbaf.CFrame = baf.CFrame * CFrame.new(0,0,-0.3)\n\t\twait(0.001)\n\tend\nend\n\nlocal function zobrazBaf()\n\tbafObrazek.Transparency = 0\nend\n\nlocal function schovejBaf()\n\tbafObrazek.Transparency = 1\nend\n\nlocal function spustPoSlapnuti(castHrace)\n\tlocal rodic = castHrace.Parent\n\tlocal clovek = rodic:FindFirstChild(\"Humanoid\")\n\tif clovek then\n\t\tzobrazBaf()\n\t\tposouvejBaf()\n\t\tschovejBaf()\n\tend\nend\n\nlocal zona = script.Parent\nzona.Touched:Connect(spustPoSlapnuti)\n"
+  },
+  {
+    "prefabId": "lightning",
+    "source": "animace.rbxl",
+    "code": "local cas = 0\nlocal osvetleni = game:GetService(\"Lighting\")\n\nwhile true do\n\tcas = cas + 0.1\n\tif cas > 24 then\n\t\tcas = 0\n\tend\n\n\tosvetleni.ClockTime = cas\n\twait(0.1)\nend\n"
+  },
+  {
+    "prefabId": "puvodni",
+    "source": "zebricek.rbxl",
+    "code": "--[[local hraci = game:GetService(\"Players\")\n\nlocal function hracSePridal(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"Zebricek\"\n\tzebricek.Parent = hrac\n\t\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Body\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\t\n\twhile true do\n\t\t\n\t\twait(1)\n\t\tlocal seznamHracu = hraci:GetPlayers()\n\n\t\tfor iterujiHrace = 1, #seznamHracu do\n\t\t\tlocal hrac = seznamHracu[iterujiHrace]\n\n\t\t\tlocal body = hrac.Zebricek.Body\t\t\t\n\t\t\tbody.Value = body.Value + 1\n\t\t\t\n\t\t\tprint(body.Value)\n\t\tend\n\tend\n\t\nend\n\nhraci.PlayerAdded:Connect(hracSePridal)\n--]]\n\n\n\nlocal sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaPostava(postava, hrac)\n\thrac:SetAttribute(\"IsAlive\", true)\n\tlocal ridicPostavy = postava:WaitForChild(\"Humanoid\")\n\tridicPostavy.Died:Connect(function()\n\t\tlocal body = hrac.leaderstats.Points\n\t\tbody.Value = 0\n\t\thrac:SetAttribute(\"IsAlive\", false)\n\tend)\nend\n\nlocal function kdyzSePridaHrac(hrac)\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"leaderstats\"\n\tzebricek.Parent = hrac\n\n\tlocal body = Instance.new(\"IntValue\")\n\tbody.Name = \"Points\"\n\tbody.Value = 0\n\tbody.Parent = zebricek\n\n\thrac:SetAttribute(\"IsAlive\", false)\n\n\thrac.CharacterAdded:Connect(function(postava)\n\t\tkdyzSePridaPostava(postava, hrac)\n\tend)\nend\n\nsluzbaHraci.PlayerAdded:Connect(kdyzSePridaHrac)\n\nwhile true do\n\twait(1)\n\tlocal seznamHracu = sluzbaHraci:GetPlayers()\n\tfor i = 1, #seznamHracu  do\n\t\tlocal hrac = seznamHracu[i]\n\t\tif hrac:GetAttribute(\"IsAlive\") then\n\t\t\tlocal body = hrac.leaderstats.Points\n\t\t\tbody.Value = body.Value + 1\n\t\tend\n\tend\nend\n"
+  },
+  {
+    "prefabId": "bodyrychleji",
+    "source": "zebricek.rbxl",
+    "code": "-- nápady na zlepšení: synchronizovat čas přes tween service, ať to nepřidává body navíc za každou část těla, co se dotkla\n\nlocal blok = script.Parent\n\nlocal jsemUvnitr = false\nblok.Color = Color3.new(1, .4, .2)\n\nlocal function pridejBodyHraci(jmenoHrace)\n\tlocal hraci = game:GetService(\"Players\")\n\tlocal seznamHracu = hraci:GetPlayers()\n\n\tfor i = 1, #seznamHracu  do\n\t\tlocal hracZeSeznamu = seznamHracu[i]\n\t\tlocal jeToNasHrac = hracZeSeznamu.Name == jmenoHrace\n\n\t\tif jeToNasHrac then\n\t\t\tlocal body = hracZeSeznamu.leaderstats.Points\n\t\t\tbody.Value = body.Value + 1\n\t\tend\n\tend\nend\n\nlocal function pridavejBodyNavic(castTelaCoSeDotkla)\n\tlocal celekTela = castTelaCoSeDotkla.Parent\n\tlocal jeToClovek = celekTela:FindFirstChild(\"Humanoid\")\n\t\n\tif jeToClovek then\n\t\tjsemUvnitr = true\n\t\tblok.Color = Color3.new(.4, 1, .2)\n\t\t\n\t\twhile jsemUvnitr do\n\t\t\twait(1)\n\t\t\tlocal jmenoCloveka = celekTela.Name\n\t\t\tpridejBodyHraci(jmenoCloveka)\n\t\tend\n\tend\n\t\nend\n\nlocal function prestanPridavatBody()\n\tjsemUvnitr = false\n\tblok.Color = Color3.new(1, .4, .2)\nend\n\nblok.Touched:Connect(pridavejBodyNavic)\nblok.TouchEnded:Connect(prestanPridavatBody)\n"
+  },
+  {
+    "prefabId": "leaderstats-coins",
+    "source": "template",
+    "code": "local sluzbaHraci = game:GetService(\"Players\")\n\nlocal function kdyzSePridaHrac(hrac)\n\t-- leaderstats = speciální složka, kterou Roblox ukáže v tabulce hráčů\n\tlocal zebricek = Instance.new(\"Folder\")\n\tzebricek.Name = \"leaderstats\"\n\tzebricek.Parent = hrac\n\n\tlocal pocetCoinu = Instance.new(\"IntValue\")\n\tpocetCoinu.Name = \"Coins\"\n\tpocetCoinu.Value = 0\n\tpocetCoinu.Parent = zebricek\nend\n\nsluzbaHraci.PlayerAdded:Connect(kdyzSePridaHrac)\n"
+  },
+  {
+    "prefabId": "coin-pickup",
+    "source": "template",
+    "code": "local mince = script.Parent\nlocal uzSebrane = false\n\nlocal function priDotyku(dotek)\n\tif uzSebrane then return end\n\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal zebricek = hrac:FindFirstChild(\"leaderstats\")\n\tif not zebricek then return end\n\n\tlocal pocetCoinu = zebricek:FindFirstChild(\"Coins\")\n\tif not pocetCoinu then return end\n\n\tuzSebrane = true\n\tpocetCoinu.Value = pocetCoinu.Value + 1\n\n\t-- udělej minci „pryč“\n\tmince.Transparency = 1\n\tmince.CanCollide = false\n\tmince:Destroy()\nend\n\nmince.Touched:Connect(priDotyku)\n"
+  },
+  {
+    "prefabId": "checkpoint",
+    "source": "template",
+    "code": "-- Tento script dej DO SpawnLocation, který je checkpoint.\n-- Tip: checkpointy pojmenuj třeba Checkpoint1, Checkpoint2...\n\nlocal kontrolniBod = script.Parent -- SpawnLocation\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\thrac.RespawnLocation = kontrolniBod\nend\n\nkontrolniBod.Touched:Connect(priDotyku)\n"
+  },
+  {
+    "prefabId": "blink-warning",
+    "source": "template",
+    "code": "local blok = script.Parent\n\nwhile true do\n\tblok.Transparency = 0\n\twait(0.2)\n\tblok.Transparency = 0.7\n\twait(0.2)\nend\n"
+  },
+  {
+    "prefabId": "finish-win",
+    "source": "template",
+    "code": "local cil = script.Parent\nlocal potrebneCoiny = 10 -- změň na 0, pokud nechceš kontrolu coinů\n\nlocal function ukazVyhru(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\tif rozhraniHrace:FindFirstChild(\"WinGui\") then return end\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"WinGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(1, 0, 0.2, 0)\n\tnapis.Position = UDim2.new(0, 0, 0.4, 0)\n\tnapis.BackgroundTransparency = 1\n\tnapis.TextScaled = true\n\tnapis.Text = \"Vyhrál jsi! 🎉\"\n\tnapis.Parent = obrazovka\nend\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tif potrebneCoiny > 0 then\n\t\tlocal zebricek = hrac:FindFirstChild(\"leaderstats\")\n\t\tlocal pocetCoinu = zebricek and zebricek:FindFirstChild(\"Coins\")\n\t\tif not pocetCoinu or pocetCoinu.Value < potrebneCoiny then\n\t\t\treturn\n\t\tend\n\tend\n\n\tukazVyhru(hrac)\nend\n\ncil.Touched:Connect(priDotyku)\n"
+  },
+  {
+    "prefabId": "lava-rise-core",
+    "source": "template",
+    "code": "local lava = script.Parent\nlocal krokNahoru = 0.15\nlocal pauza = 1\n\nwhile true do\n\tlava.CFrame = lava.CFrame * CFrame.new(0, krokNahoru, 0)\n\twait(pauza)\nend\n"
+  },
+  {
+    "prefabId": "lava-safe-zone-win",
+    "source": "template",
+    "code": "local bezpecnaZona = script.Parent\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal obrazovka = hrac:WaitForChild(\"PlayerGui\")\n\tif obrazovka:FindFirstChild(\"SafeWinGui\") then return end\n\n\tlocal obrazovkaVrstva = Instance.new(\"ScreenGui\")\n\tobrazovkaVrstva.Name = \"SafeWinGui\"\n\tobrazovkaVrstva.Parent = obrazovka\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(1, 0, 0.18, 0)\n\tnapis.Position = UDim2.new(0, 0, 0.4, 0)\n\tnapis.BackgroundTransparency = 1\n\tnapis.TextScaled = true\n\tnapis.Text = \"Jsi v safe zóně!\"\n\tnapis.Parent = obrazovkaVrstva\nend\n\nbezpecnaZona.Touched:Connect(priDotyku)\n"
+  },
+  {
+    "prefabId": "jump-powerup",
+    "source": "template",
+    "code": "local bonusObjekt = script.Parent\nlocal bonusSkok = 90\nlocal trvani = 8\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal puvodni = ridicPostavy.JumpPower\n\tridicPostavy.JumpPower = bonusSkok\n\twait(trvani)\n\tridicPostavy.JumpPower = puvodni\nend\n\nbonusObjekt.Touched:Connect(priDotyku)\n"
+  },
+  {
+    "prefabId": "ui-round-timer",
+    "source": "template",
+    "code": "local delkaKola = 60\n\nlocal function pridejCasovacRozhrani(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"RoundTimerGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Name = \"TimerLabel\"\n\tnapis.Size = UDim2.new(0.25, 0, 0.08, 0)\n\tnapis.Position = UDim2.new(0.02, 0, 0.02, 0)\n\tnapis.TextScaled = true\n\tnapis.Text = \"Čas: \" .. delkaKola\n\tnapis.Parent = obrazovka\n\n\tfor sekunda = delkaKola, 0, -1 do\n\t\tnapis.Text = \"Čas: \" .. sekunda\n\t\twait(1)\n\tend\nend\n\ngame.Players.PlayerAdded:Connect(pridejCasovacRozhrani)\n"
+  },
+  {
+    "prefabId": "key-pickup",
+    "source": "template",
+    "code": "local klicObjekt = script.Parent\nlocal sebrano = false\n\nlocal function priDotyku(dotek)\n\tif sebrano then return end\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal statistiky = hrac:FindFirstChild(\"leaderstats\")\n\tif not statistiky then return end\n\n\tlocal pocetKlicu = statistiky:FindFirstChild(\"Keys\")\n\tif not pocetKlicu then\n\t\tpocetKlicu = Instance.new(\"IntValue\")\n\t\tpocetKlicu.Name = \"Keys\"\n\t\tpocetKlicu.Value = 0\n\t\tpocetKlicu.Parent = statistiky\n\tend\n\n\tsebrano = true\n\tpocetKlicu.Value = pocetKlicu.Value + 1\n\tklicObjekt:Destroy()\nend\n\nklicObjekt.Touched:Connect(priDotyku)\n"
+  },
+  {
+    "prefabId": "key-door-open",
+    "source": "template",
+    "code": "local dvere = script.Parent\nlocal potrebaKlicu = 3\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tlocal hrac = game.Players:GetPlayerFromCharacter(postava)\n\tif not hrac then return end\n\n\tlocal statistiky = hrac:FindFirstChild(\"leaderstats\")\n\tlocal pocetKlicu = statistiky and statistiky:FindFirstChild(\"Keys\")\n\n\tif pocetKlicu and pocetKlicu.Value >= potrebaKlicu then\n\t\tdvere.CanCollide = false\n\t\tdvere.Transparency = 0.8\n\tend\nend\n\ndvere.Touched:Connect(priDotyku)\n"
+  },
+  {
+    "prefabId": "key-random-spawn",
+    "source": "template",
+    "code": "local slozkaKlicu = workspace:WaitForChild(\"Keys\")\nlocal slozkaPozic = workspace:WaitForChild(\"KeySpawns\")\n\nlocal poziceSpawnu = slozkaPozic:GetChildren()\nlocal pocetKlicu = slozkaKlicu:GetChildren()\n\nfor i = 1, #pocetKlicu do\n\tlocal poradiPozice = math.random(1, #poziceSpawnu)\n\tlocal cilovaPozice = poziceSpawnu[poradiPozice]\n\tpocetKlicu[i].Position = cilovaPozice.Position\nend\n"
+  },
+  {
+    "prefabId": "key-checklist-ui",
+    "source": "template",
+    "code": "local function pridejRozhrani(hrac)\n\tlocal rozhraniHrace = hrac:WaitForChild(\"PlayerGui\")\n\n\tlocal obrazovka = Instance.new(\"ScreenGui\")\n\tobrazovka.Name = \"KeyChecklistGui\"\n\tobrazovka.ResetOnSpawn = false\n\tobrazovka.Parent = rozhraniHrace\n\n\tlocal napis = Instance.new(\"TextLabel\")\n\tnapis.Size = UDim2.new(0.3, 0, 0.09, 0)\n\tnapis.Position = UDim2.new(0.02, 0, 0.12, 0)\n\tnapis.TextScaled = true\n\tnapis.Text = \"Klíče: 0/3\"\n\tnapis.Parent = obrazovka\n\n\twhile true do\n\t\twait(0.2)\n\t\tlocal statistiky = hrac:FindFirstChild(\"leaderstats\")\n\t\tlocal pocetKlicu = statistiky and statistiky:FindFirstChild(\"Keys\")\n\t\tlocal hodnota = pocetKlicu and pocetKlicu.Value or 0\n\t\tnapis.Text = \"Klíče: \" .. hodnota .. \"/3\"\n\tend\nend\n\ngame.Players.PlayerAdded:Connect(pridejRozhrani)\n"
+  },
+  {
+    "prefabId": "key-sfx-lights",
+    "source": "template",
+    "code": "local spinac = script.Parent\nlocal zvuk = spinac:FindFirstChild(\"KeySound\")\nlocal svetlo = spinac:FindFirstChild(\"PointLight\")\n\nlocal function priDotyku(dotek)\n\tlocal postava = dotek.Parent\n\tlocal ridicPostavy = postava:FindFirstChild(\"Humanoid\")\n\tif not ridicPostavy then return end\n\n\tif zvuk then\n\t\tzvuk:Play()\n\tend\n\n\tif svetlo then\n\t\tsvetlo.Enabled = true\n\t\twait(0.4)\n\t\tsvetlo.Enabled = false\n\tend\nend\n\nspinac.Touched:Connect(priDotyku)\n"
+  }
+]
