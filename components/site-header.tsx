@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LevelSelector } from "@/components/level-selector";
+import { withLevelPath } from "@/lib/level-route";
+import { useLevel } from "@/lib/use-level";
 
 function NavLink({
   href,
@@ -34,16 +36,21 @@ function NavLink({
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const { level } = useLevel();
+  const homeHref = withLevelPath("/", level);
+  const checklistHref = withLevelPath("/checklist/1", level);
+  const checklistPrefix = withLevelPath("/checklist", level);
+  const kodyHref = withLevelPath("/kody", level);
 
   return (
     <header className="sticky top-0 z-20 border-b border-slate-200 bg-slate-50/95 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-3 sm:px-6">
         <div className="flex flex-wrap items-center gap-2">
-          <Link href="/" className="mr-2 text-base font-black text-slate-900">
+          <Link href={homeHref} className="mr-2 text-base font-black text-slate-900">
             Roblox Workshop
           </Link>
-          <NavLink href="/checklist/1" label="Checklist" pathname={pathname} matchPrefix="/checklist" />
-          <NavLink href="/kody" label="Kódy" pathname={pathname} />
+          <NavLink href={checklistHref} label="Checklist" pathname={pathname} matchPrefix={checklistPrefix} />
+          <NavLink href={kodyHref} label="Kódy" pathname={pathname} />
         </div>
 
         <LevelSelector showLabel={false} />

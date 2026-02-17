@@ -1,5 +1,7 @@
 ﻿"use client";
 
+import { usePathname, useRouter } from "next/navigation";
+import { withLevelPath } from "@/lib/level-route";
 import { useLevel } from "@/lib/use-level";
 import type { Level } from "@/lib/types";
 
@@ -38,13 +40,23 @@ function LevelButton({
 
 export function LevelSelector({ showLabel = true, className = "" }: LevelSelectorProps) {
   const { level, setLevel } = useLevel();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLevelChange = (nextLevel: Level) => {
+    setLevel(nextLevel);
+    const nextPath = withLevelPath(pathname, nextLevel);
+    if (nextPath !== pathname) {
+      router.push(nextPath);
+    }
+  };
 
   return (
     <div className={`flex flex-wrap items-center gap-3 ${className}`.trim()}>
       {showLabel ? <p className="text-sm font-medium text-slate-700">Moje úroveň:</p> : null}
       <div className="flex items-center gap-2">
-        <LevelButton value="beginner" currentLevel={level} label="Začátečník" onClick={setLevel} />
-        <LevelButton value="advanced" currentLevel={level} label="Pokročilý" onClick={setLevel} />
+        <LevelButton value="beginner" currentLevel={level} label="Začátečník" onClick={handleLevelChange} />
+        <LevelButton value="advanced" currentLevel={level} label="Pokročilý" onClick={handleLevelChange} />
       </div>
     </div>
   );

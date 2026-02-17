@@ -1,5 +1,5 @@
 ﻿import { redirect } from "next/navigation";
 
 export default function ChecklistPage() {
-  redirect("/checklist/1");
+  redirect("/zacatecnik/checklist/1");
 }

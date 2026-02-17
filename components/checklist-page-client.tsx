@@ -15,6 +15,7 @@ import {
   STORAGE_KEYS,
   writeJsonToStorage,
 } from "@/lib/storage";
+import { withLevelPath } from "@/lib/level-route";
 import { useLevel } from "@/lib/use-level";
 import type { ChecklistItem } from "@/lib/types";
 
@@ -118,6 +119,9 @@ export function ChecklistPageClient({ taskKey }: { taskKey: TaskKey }) {
     level === "beginner" &&
     hasOverHalfChecked &&
     (hiddenSectionsCount > 0 || taskKey === "task2");
+  const task1Href = withLevelPath("/checklist/1", level);
+  const task2Href = withLevelPath("/checklist/2", level);
+  const kodyHref = withLevelPath("/kody", level);
 
   return (
     <div className="space-y-6">
@@ -131,7 +135,7 @@ export function ChecklistPageClient({ taskKey }: { taskKey: TaskKey }) {
         </p>
         <div className="mt-4 grid gap-3 md:grid-cols-4 sm:grid-cols-2">
           <Link
-            href="/checklist/1"
+            href={task1Href}
             className={`rounded-xl px-4 py-3 text-left transition ${
               taskKey === "task1"
                 ? "bg-slate-600 text-white"
@@ -142,7 +146,7 @@ export function ChecklistPageClient({ taskKey }: { taskKey: TaskKey }) {
             <p className="text-xs opacity-80">Cesta za pokladem</p>
           </Link>
           <Link
-            href="/checklist/2"
+            href={task2Href}
             className={`rounded-xl px-4 py-3 text-left transition ${
               taskKey === "task2"
                 ? "bg-slate-600 text-white"
@@ -251,7 +255,7 @@ export function ChecklistPageClient({ taskKey }: { taskKey: TaskKey }) {
             odemkni další kroky i bonusové části.
           </p>
           <Link
-            href="/kody"
+            href={kodyHref}
             className="mt-4 inline-flex rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white hover:bg-sky-500"
           >
             Otevřít kódy

@@ -8,6 +8,7 @@ import {
   getUsedInLabel,
   prefabs,
 } from "@/lib/data";
+import { withLevelPath } from "@/lib/level-route";
 import { useLevel } from "@/lib/use-level";
 import type { Difficulty } from "@/lib/types";
 
@@ -138,7 +139,7 @@ export function PrefabCatalogClient() {
         {visiblePrefabs.map((prefab) => (
           <Link
             key={prefab.id}
-            href={`/kody/${prefab.id}`}
+            href={withLevelPath(`/kody/${prefab.id}`, level)}
             className="group block rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
           >
             <article className="flex h-full flex-col">

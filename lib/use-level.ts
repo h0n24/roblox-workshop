@@ -1,19 +1,28 @@
 ﻿"use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { getLevelFromPathname } from "@/lib/level-route";
 import { readLevelFromStorage, STORAGE_KEYS, writeLevelToStorage } from "@/lib/storage";
 import type { Level } from "@/lib/types";
 
 const LEVEL_EVENT_NAME = "rw-level-change";
 
 export function useLevel() {
-  const [level, setLevelState] = useState<Level>("beginner");
+  const pathname = usePathname();
+  const routeLevel = getLevelFromPathname(pathname);
+  const [level, setLevelState] = useState<Level>(routeLevel ?? "beginner");
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    setLevelState(readLevelFromStorage());
+    if (routeLevel) {
+      setLevelState(routeLevel);
+      writeLevelToStorage(routeLevel);
+    } else {
+      setLevelState(readLevelFromStorage());
+    }
     setReady(true);
-  }, []);
+  }, [routeLevel]);
 
   useEffect(() => {
     const onStorage = (event: StorageEvent) => {
@@ -21,10 +30,18 @@ export function useLevel() {
         return;
       }
 
+      if (getLevelFromPathname(window.location.pathname)) {
+        return;
+      }
+
       setLevelState(readLevelFromStorage());
     };
 
     const onCustomChange = () => {
+      if (getLevelFromPathname(window.location.pathname)) {
+        return;
+      }
+
       setLevelState(readLevelFromStorage());
     };
 

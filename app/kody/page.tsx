@@ -1,5 +1,5 @@
-﻿import { PrefabCatalogClient } from "@/components/prefab-catalog-client";
+import { redirect } from "next/navigation";
 
-export default function KodyPage() {
-  return <PrefabCatalogClient />;
+export default function LegacyKodyPage() {
+  redirect("/zacatecnik/kody");
 }
